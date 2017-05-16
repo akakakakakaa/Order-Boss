@@ -2,6 +2,7 @@ package b05studio.com.order_boss.view;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,16 +14,23 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import b05studio.com.order_boss.R;
+import b05studio.com.order_boss.view.fragment.MapFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private MapFragment mapFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initToolbar();
+        initFragment();
         initBottomNaviBar();
+    }
+
+    private void initFragment() {
+        mapFragment = new MapFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container,mapFragment).commit();
     }
 
     private void initToolbar() {
@@ -42,8 +50,10 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position) {
+                Fragment currentSelectedFragment = null;
                 switch (position) {
                     case 0:
+                        currentSelectedFragment = mapFragment;
                         break;
                     case 1:
                         break;
@@ -52,10 +62,11 @@ public class MainActivity extends AppCompatActivity {
                     default:
                         break;
                 }
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,currentSelectedFragment).commit();
             }
 
             @Override
-              public void onTabUnselected(int position) {
+            public void onTabUnselected(int position) {
 
             }
 

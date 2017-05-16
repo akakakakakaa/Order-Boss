@@ -1,4 +1,4 @@
-package b05studio.com.order_boss.view.util;
+package b05studio.com.order_boss.util;
 
 import android.app.Application;
 
