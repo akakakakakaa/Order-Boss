@@ -10,7 +10,7 @@ public class OrderBossMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_boss_main);
+        setContentView(R.layout.fragment_order_boss_main);
 
     }
 }

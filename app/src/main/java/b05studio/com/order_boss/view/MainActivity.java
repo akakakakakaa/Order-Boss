@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -13,15 +16,24 @@ import b05studio.com.order_boss.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BottomNavigationBar bottomNavigationBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initToolbar();
         initBottomNaviBar();
     }
 
+    private void initToolbar() {
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+    }
+
     private void initBottomNaviBar() {
+        BottomNavigationBar bottomNavigationBar;
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.mainBottomNavigationBar);
         bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable .icon_main_checked));
         bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.icon_order_list_checked));
@@ -46,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
               public void onTabUnselected(int position) {
 
             }
+
 
             @Override
             public void onTabReselected(int position) {

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Order-Boss</string>
+    <string name="search_hint">키워드 검색</string>
+    <string name="daum_map_api_key">7f4c497b50201e3a08bd299c9e39bfeb</string>
 </resources>
