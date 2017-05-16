@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.mainToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     case 1:
                         break;
                     case 2:
-                        break;
+                        break; 
                     default:
                         break;
                 }
