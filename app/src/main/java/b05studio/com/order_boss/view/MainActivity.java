@@ -15,10 +15,13 @@ import com.tsengvn.typekit.TypekitContextWrapper;
 
 import b05studio.com.order_boss.R;
 import b05studio.com.order_boss.view.fragment.MapFragment;
+import b05studio.com.order_boss.view.fragment.RestaurantListFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     private MapFragment mapFragment;
+    private RestaurantListFragment restaurantListFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initFragment() {
         mapFragment = new MapFragment();
+        restaurantListFragment = new RestaurantListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.container,mapFragment).commit();
     }
 
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                         currentSelectedFragment = mapFragment;
                         break;
                     case 1:
+                        currentSelectedFragment = restaurantListFragment;
                         break;
                     case 2:
                         break; 

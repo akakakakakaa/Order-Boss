@@ -4,17 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
-import com.squareup.picasso.Picasso;
 
 import net.daum.mf.map.api.MapView;
 
@@ -29,8 +25,8 @@ import b05studio.com.order_boss.model.RestaurantInfo;
  */
 
 public class MapFragment extends Fragment {
-    RecyclerView mapRestaurantRecyclerView;
-    RecyclerView.Adapter mapRestaurantAdapter;
+    private RecyclerView mapRestaurantRecyclerView;
+    private RecyclerView.Adapter mapRestaurantAdapter;
 
     @Nullable
     @Override
@@ -69,7 +65,7 @@ public class MapFragment extends Fragment {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = inflater.from(parent.getContext()).inflate(R.layout.cardview_map_restaurant, parent, false);
+            View v = inflater.from(parent.getContext()).inflate(R.layout.cardview_map, parent, false);
             ViewHolder holder = new ViewHolder(v);
             return holder;
         }
