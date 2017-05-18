@@ -6,8 +6,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -18,7 +22,7 @@ import b05studio.com.order_boss.view.fragment.MapFragment;
 import b05studio.com.order_boss.view.fragment.RestaurantListFragment;
 
 public class MainActivity extends AppCompatActivity {
-
+    private Fragment currentSelectedFragment;
     private MapFragment mapFragment;
     private RestaurantListFragment restaurantListFragment;
 
@@ -26,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initToolbar();
         initFragment();
         initBottomNaviBar();
     }
@@ -34,14 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private void initFragment() {
         mapFragment = new MapFragment();
         restaurantListFragment = new RestaurantListFragment();
+
         getSupportFragmentManager().beginTransaction().replace(R.id.container,mapFragment).commit();
-    }
-
-    private void initToolbar() {
-        Toolbar toolbar = (Toolbar)findViewById(R.id.mainToolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
     }
 
     private void initBottomNaviBar() {
@@ -54,20 +51,21 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position) {
-                Fragment currentSelectedFragment = null;
                 switch (position) {
                     case 0:
+                        initToolbar(position);
                         currentSelectedFragment = mapFragment;
                         break;
                     case 1:
+                        initToolbar(position);
                         currentSelectedFragment = restaurantListFragment;
                         break;
                     case 2:
-                        break; 
+                        break;
                     default:
                         break;
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,currentSelectedFragment).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,currentSelectedFragment).addToBackStack(null).commit();
             }
 
             @Override
@@ -81,6 +79,47 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void initToolbar(final int position) {
+        if(position == 0 || position == 1) {
+            Toolbar toolbar = (Toolbar) findViewById(R.id.mainToolbar);
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+            final EditText searchText = (EditText) findViewById(R.id.mainSearchView);
+            TextWatcher watcher = new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(final CharSequence charSequence, int i, int i1, int i2) {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String queryString = searchText.getText().toString();
+                            switch (position) {
+                                case 0:
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.container,restaurantListFragment).commit();
+                                    restaurantListFragment.searchKeyword(queryString);
+                                    break;
+                                case 1:
+                                    restaurantListFragment.searchKeyword(queryString);
+                                    break;
+                            }
+                        }
+                    }).start();
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            };
+            searchText.addTextChangedListener(watcher);
+        }
     }
 
     @Override

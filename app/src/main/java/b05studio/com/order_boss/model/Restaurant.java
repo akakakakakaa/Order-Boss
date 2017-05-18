@@ -1,5 +1,7 @@
 package b05studio.com.order_boss.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by young on 2017-05-16.
  */
@@ -8,12 +10,12 @@ public class Restaurant {
 
     private String id;
     private String name;
-    private String foodTag;
+    private ArrayList<String> foodTag;
     private String address;
     private int distance;
     private String imageUrl;
 
-    public Restaurant(String id, String name, String foodTag, String address, int distance, String imageUrl) {
+    public Restaurant(String id, String name, ArrayList<String> foodTag, String address, int distance, String imageUrl) {
         this.id = id;
         this.name = name;
         this.foodTag = foodTag;
@@ -38,11 +40,11 @@ public class Restaurant {
         this.name = name;
     }
 
-    public String getFoodTag() {
+    public ArrayList<String> getFoodTag() {
         return foodTag;
     }
 
-    public void setFoodTag(String foodTag) {
+    public void setFoodTag(ArrayList<String> foodTag) {
         this.foodTag = foodTag;
     }
 

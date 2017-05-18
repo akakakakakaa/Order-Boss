@@ -44,15 +44,20 @@ public class MapFragment extends Fragment {
         mapRestaurantRecyclerView.setHasFixedSize(true);
         ArrayList<RestaurantInfo> restaurantInfos = new ArrayList<>();
         //TODO: 2017-05-17 파이어베이스에서 레스토랑 데이터 들고오는 것 필요함.
-        restaurantInfos.add(new RestaurantInfo(new Restaurant("1", "3. 멘무샤", "일식, 라멘", "경기도 화성시 동탄중앙로 220", 133, "1"), 62, 12, 25));
-        restaurantInfos.add(new RestaurantInfo(new Restaurant("2", "3. 멘무샤", "일식, 라멘", "경기도 화성시 동탄중앙로 220", 133, "1"), 62, 12, 25));
-        restaurantInfos.add(new RestaurantInfo(new Restaurant("3", "3. 멘무샤", "일식, 라멘", "경기도 화성시 동탄중앙로 220", 133, "1"), 62, 12, 25));
+        /* for test foodTag */
+        ArrayList<String> foodTag = new ArrayList<>();
+        foodTag.add("일식");
+        foodTag.add("라멘");
+        /* end */
+        restaurantInfos.add(new RestaurantInfo(new Restaurant("1", "3. 멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", 133, "1"), 62, 12, 25));
+        restaurantInfos.add(new RestaurantInfo(new Restaurant("2", "3. 멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", 133, "1"), 62, 12, 25));
+        restaurantInfos.add(new RestaurantInfo(new Restaurant("3", "3. 멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", 133, "1"), 62, 12, 25));
         mapRestaurantAdapter = new MapRestaurantAdapter(restaurantInfos, getContext(), inflater);
         mapRestaurantRecyclerView.setAdapter(mapRestaurantAdapter);
         return rootView;
     }
 
-     private class MapRestaurantAdapter extends RecyclerView.Adapter<MapRestaurantAdapter.ViewHolder> {
+    private class MapRestaurantAdapter extends RecyclerView.Adapter<MapRestaurantAdapter.ViewHolder> {
         private ArrayList<RestaurantInfo> restaurantInfos;
         private Context context;
         private LayoutInflater inflater;
@@ -74,10 +79,15 @@ public class MapFragment extends Fragment {
         public void onBindViewHolder(ViewHolder holder, int position) {
             RestaurantInfo restaurantInfo = restaurantInfos.get(position);
             Restaurant restaurant = restaurantInfo.getRestaurant();
+            ArrayList<String> foodTag = restaurant.getFoodTag();
 
             //Picasso.with(context).load(restaurant.getImageUrl()).into(holder.mapRestaurantImageView);
             holder.mapRestaurantName.setText(restaurant.getName());
-            holder.mapRestaurantFoodTag.setText(restaurant.getFoodTag());
+            String foodTagStr = "";
+            for(int i=0; i<foodTag.size()-1; i++)
+                foodTagStr += foodTag.get(i) + ", ";
+            foodTagStr += foodTag.get(foodTag.size() - 1);
+            holder.mapRestaurantFoodTag.setText(foodTagStr);
             holder.mapRestaurantAddress.setText(restaurant.getAddress());
             holder.mapRestaurantLikeNumber.setText(Integer.toString(restaurantInfo.getLikeNumber()));
             holder.mapRestaurantReviewNumber.setText(Integer.toString(restaurantInfo.getReviewNumber()));
