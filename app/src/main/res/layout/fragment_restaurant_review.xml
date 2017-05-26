@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/restaurantReviewIcon"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="35dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/restaurantReviewReviewText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="리뷰"
+        android:textSize="20sp"
+        android:textColor="#95989A"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="restaurantReviewIcon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="restaurantReviewIcon"/>
+    <TextView
+        android:id="@+id/restaurantReviewReservationNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="24dp"
+        android:text="누적 예약 수"
+        android:textSize="20sp"
+        android:textColor="#95989A"
+        app:layout_constraintTop_toBottomOf="restaurantReviewReviewText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="restaurantReviewReviewText"/>
+
+    <TextView
+        android:id="@+id/restaurantReviewGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4.8"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@+id/restaurantReviewIcon"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantReviewIcon"
+        app:layout_constraintRight_toRightOf="@+id/restaurantReviewIcon"/>
+</android.support.constraint.ConstraintLayout>

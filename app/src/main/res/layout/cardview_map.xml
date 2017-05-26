@@ -13,8 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="1dp"
         android:layout_marginLeft="8dp"
-        android:src="@drawable/restaurant_test_image"
-        android:background="@null"
+        android:background="@drawable/restaurant_test_image"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <TextView
