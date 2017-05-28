@@ -17,7 +17,11 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
+import java.util.ArrayList;
+
 import b05studio.com.order_boss.R;
+import b05studio.com.order_boss.model.Review;
+import b05studio.com.order_boss.model.User;
 import b05studio.com.order_boss.view.fragment.MapFragment;
 import b05studio.com.order_boss.view.fragment.RestaurantListFragment;
 
@@ -30,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /* for test create user*/
+        User.setCurrentUser(new User("1", "", "김만수", new ArrayList<Review>()));
+
         initFragment();
         initBottomNaviBar();
     }

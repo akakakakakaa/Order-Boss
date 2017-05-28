@@ -117,6 +117,8 @@ public class RestaurantMenuFragment extends Fragment {
                         @Override
                         public void onClick(View view) {
                             User.getCurrentUser().getCurrentOrderInfos().add(new OrderInfo(RestaurantInfo.getCurrentRestaurantInfo().getId(), menuInfo, selectedNum));
+                            RestaurantActivity.popupWindow.dismiss();
+                            RestaurantActivity.popupWindow = null;
                         }
                     });
 
