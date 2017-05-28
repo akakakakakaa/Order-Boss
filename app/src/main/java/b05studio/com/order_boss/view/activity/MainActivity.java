@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private void initBottomNaviBar() {
         BottomNavigationBar bottomNavigationBar;
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.mainBottomNavigationBar);
+        BottomNavigationItem firstBottomItem = new BottomNavigationItem(R.drawable .icon_main_checked);
+       // firstBottomItem.setInactiveIcon()
         bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable .icon_main_checked));
         bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.icon_order_list_checked));
         bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.icon_profile_checked)).initialise();
