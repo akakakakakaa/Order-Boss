@@ -1,23 +1,20 @@
-package b05studio.com.order_boss.view;
+package b05studio.com.order_boss.view.activity;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 import b05studio.com.order_boss.R;
+import b05studio.com.order_boss.view.fragment.ProfileFragment;
 import b05studio.com.order_boss.view.fragment.MapFragment;
 import b05studio.com.order_boss.view.fragment.RestaurantListFragment;
 
@@ -25,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private Fragment currentSelectedFragment;
     private MapFragment mapFragment;
     private RestaurantListFragment restaurantListFragment;
+    private ProfileFragment profileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private void initFragment() {
         mapFragment = new MapFragment();
         restaurantListFragment = new RestaurantListFragment();
+        profileFragment = new ProfileFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,mapFragment).commit();
     }
@@ -61,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
                         currentSelectedFragment = restaurantListFragment;
                         break;
                     case 2:
+                        initToolbar(position);
+                        currentSelectedFragment = profileFragment;
                         break;
                     default:
                         break;

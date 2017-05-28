@@ -22,7 +22,7 @@ import b05studio.com.order_boss.R;
 import b05studio.com.order_boss.model.MenuInfo;
 import b05studio.com.order_boss.model.RestaurantInfo;
 import b05studio.com.order_boss.model.Review;
-import b05studio.com.order_boss.view.RestaurantActivity;
+import b05studio.com.order_boss.view.activity.RestaurantActivity;
 
 /**
  * Created by young on 2017-05-16.

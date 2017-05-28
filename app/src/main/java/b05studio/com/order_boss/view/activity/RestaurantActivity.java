@@ -1,4 +1,4 @@
-package b05studio.com.order_boss.view;
+package b05studio.com.order_boss.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,7 @@ import android.widget.PopupWindow;
 import android.widget.ScrollView;
 
 import b05studio.com.order_boss.R;
+import b05studio.com.order_boss.view.WrapContentViewPager;
 import b05studio.com.order_boss.view.fragment.RestaurantInfoFragment;
 import b05studio.com.order_boss.view.fragment.RestaurantMenuFragment;
 import b05studio.com.order_boss.view.fragment.RestaurantReviewFragment;

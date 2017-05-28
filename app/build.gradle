@@ -34,6 +34,7 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.4.1'
     compile 'com.tsengvn:typekit:1.0.1'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     testCompile 'junit:junit:4.12'
     compile files('libs/libDaumMapAndroid.jar')
 }
