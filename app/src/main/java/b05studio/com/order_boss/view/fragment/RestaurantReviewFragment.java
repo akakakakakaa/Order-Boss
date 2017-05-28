@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import b05studio.com.order_boss.R;
 import b05studio.com.order_boss.model.MenuInfo;
+import b05studio.com.order_boss.model.RestaurantInfo;
 import b05studio.com.order_boss.model.Review;
 import b05studio.com.order_boss.view.RestaurantActivity;
 
@@ -33,20 +34,7 @@ public class RestaurantReviewFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.restaurantReviewRecyclerView);
         recyclerView.setHasFixedSize(true);
         //get MenuInfo
-        ArrayList<Review> reviews = new ArrayList<>();
-        reviews.add(new Review("임정연", "", 1, "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
-                " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
-                "단골해야겠습니다!!!!!!", "", 5));
-        reviews.add(new Review("임정연", "", 1, "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
-                " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
-                "단골해야겠습니다!!!!!!", "", 5));
-        reviews.add(new Review("임정연", "", 1, "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
-                " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
-                "단골해야겠습니다!!!!!!", "", 5));
-        reviews.add(new Review("임정연", "", 1, "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
-                " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
-                "단골해야겠습니다!!!!!!", "", 5));
-        RestaurantReviewAdatper restaurantReviewAdatper = new RestaurantReviewAdatper(reviews, getContext(), inflater);
+        RestaurantReviewAdatper restaurantReviewAdatper = new RestaurantReviewAdatper(RestaurantInfo.getCurrentRestaurantInfo().getReviews(), getContext(), inflater);
         recyclerView.setAdapter(restaurantReviewAdatper);
         return rootView;
     }

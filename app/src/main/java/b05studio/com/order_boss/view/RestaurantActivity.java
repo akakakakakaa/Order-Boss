@@ -11,10 +11,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.PopupWindow;
 import android.widget.ScrollView;
 
 import b05studio.com.order_boss.R;
-import b05studio.com.order_boss.model.Restaurant;
 import b05studio.com.order_boss.view.fragment.RestaurantInfoFragment;
 import b05studio.com.order_boss.view.fragment.RestaurantMenuFragment;
 import b05studio.com.order_boss.view.fragment.RestaurantReviewFragment;
@@ -25,6 +26,7 @@ import b05studio.com.order_boss.view.fragment.RestaurantReviewFragment;
 
 public class RestaurantActivity extends AppCompatActivity {
     private WrapContentViewPager viewPager;
+    public static PopupWindow popupWindow = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class RestaurantActivity extends AppCompatActivity {
         setScrollView();
         initToolbar();
         initTabWithViewPager();
-        initReservationButton();
+        initButtons();
     }
 
     private void setScrollView() {
@@ -79,13 +81,21 @@ public class RestaurantActivity extends AppCompatActivity {
         });
     }
 
-    private void initReservationButton() {
+    private void initButtons() {
         Button reservationBtn = (Button)findViewById(R.id.restaurantReservation);
         reservationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RestaurantActivity.this, ReservationActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        ImageButton backBtn = (ImageButton)findViewById(R.id.restaurantBackButton);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
@@ -100,19 +110,21 @@ public class RestaurantActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
+            Fragment fragment;
             switch (position) {
                 case 0:
-                    RestaurantMenuFragment fragment = new RestaurantMenuFragment();
-                    return fragment;
+                    fragment = new RestaurantMenuFragment();
+                    break;
                 case 1:
-                    RestaurantInfoFragment fragment2 = new RestaurantInfoFragment();
-                    return fragment2;
+                    fragment = new RestaurantInfoFragment();
+                    break;
                 case 2:
-                    RestaurantReviewFragment fragment3 = new RestaurantReviewFragment();
-                    return fragment3;
+                    fragment = new RestaurantReviewFragment();
+                    break;
                 default:
                     return null;
             }
+            return fragment;
         }
 
         @Override
@@ -120,4 +132,14 @@ public class RestaurantActivity extends AppCompatActivity {
             return tabCount;
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        if(popupWindow != null) {
+            popupWindow.dismiss();
+            popupWindow = null;
+        }
+        else
+            finish();
+    }
 }

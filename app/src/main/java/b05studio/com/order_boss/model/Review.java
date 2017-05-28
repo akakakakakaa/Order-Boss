@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 
 public class Review {
+    private String reviewId;
     private String userName;
     private String userProfileUrl;
     private long timestamp;
@@ -14,13 +15,22 @@ public class Review {
     private String reviewImgUrl;
     private int likeNumber;
 
-    public Review(String userName, String userProfileUrl, long timestamp, String reviewContent, String reviewImgUrl, int likeNumber) {
+    public Review(String reviewId, String userName, String userProfileUrl, long timestamp, String reviewContent, String reviewImgUrl, int likeNumber) {
+        this.reviewId = reviewId;
         this.userName = userName;
         this.userProfileUrl = userProfileUrl;
         this.timestamp = timestamp;
         this.reviewContent = reviewContent;
         this.reviewImgUrl = reviewImgUrl;
         this.likeNumber = likeNumber;
+    }
+
+    public String getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(String reviewId) {
+        this.reviewId = reviewId;
     }
 
     public String getUserName() {

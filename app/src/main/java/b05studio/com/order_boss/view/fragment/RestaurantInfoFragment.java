@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import b05studio.com.order_boss.R;
 import b05studio.com.order_boss.model.MenuInfo;
+import b05studio.com.order_boss.model.RestaurantInfo;
 import b05studio.com.order_boss.view.RestaurantActivity;
 
 /**
@@ -30,12 +31,7 @@ public class RestaurantInfoFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView)rootView.findViewById(R.id.restaurantInfoRecyclerView);
         recyclerView.setHasFixedSize(true);
         //get MenuInfo
-        ArrayList<MenuInfo> menuInfos = new ArrayList<>();
-        menuInfos.add(new MenuInfo("", "소세지 또띠아", 15000));
-        menuInfos.add(new MenuInfo("", "모둠 포", 15000));
-        menuInfos.add(new MenuInfo("", "생맥주 500cc", 6000));
-        menuInfos.add(new MenuInfo("", "생맥주 500cc", 6000));
-        RestaurantInfoFragment.RestaurantInfoAdatper restaurantMenuAdatper = new RestaurantInfoFragment.RestaurantInfoAdatper(menuInfos, getContext(), inflater);
+        RestaurantInfoFragment.RestaurantInfoAdatper restaurantMenuAdatper = new RestaurantInfoFragment.RestaurantInfoAdatper(RestaurantInfo.getCurrentRestaurantInfo().getMenuInfos(), getContext(), inflater);
         recyclerView.setAdapter(restaurantMenuAdatper);
 
         return rootView;
