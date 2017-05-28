@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E9E9E9"
+    >
+
+    <View
+        android:id="@+id/profileUserMain"
+        android:layout_width="0dp"
+        android:layout_height="112dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#FFFFFF"
+        >
+    </View>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profileUserImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/icon_jungyun"
+        app:layout_constraintLeft_toLeftOf="@+id/profileUserMain"
+        app:layout_constraintTop_toTopOf="@+id/profileUserMain"
+        app:layout_constraintBottom_toBottomOf="@+id/profileUserMain"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FFA133"
+        />
+
+    <TextView
+        android:id="@+id/profileUserId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="임정연"
+        app:layout_constraintLeft_toLeftOf="@+id/profileUserMain"
+        app:layout_constraintTop_toTopOf="@+id/profileUserMain"
+        android:layout_marginTop="36dp"
+        android:layout_marginLeft="115dp"
+        android:textSize="20sp"
+        android:layout_marginStart="115dp" />
+
+    <TextView
+        android:id="@+id/profileUserPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="010-1234-5678"
+        app:layout_constraintLeft_toLeftOf="@+id/profileUserMain"
+        app:layout_constraintTop_toTopOf="@+id/profileUserMain"
+        android:layout_marginTop="66dp"
+        android:layout_marginLeft="115dp"
+        android:textSize="16sp"
+        android:layout_marginStart="115dp" />
+
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/profileNavigationBar"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileUserMain"
+        android:layout_marginTop="1dp"
+        >
+
+    </com.ashokvarma.bottomnavigation.BottomNavigationBar>
+
+
+</android.support.constraint.ConstraintLayout>

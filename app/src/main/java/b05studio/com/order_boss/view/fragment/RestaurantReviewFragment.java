@@ -11,15 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import b05studio.com.order_boss.R;
-import b05studio.com.order_boss.model.MenuInfo;
 import b05studio.com.order_boss.model.RestaurantInfo;
 import b05studio.com.order_boss.model.Review;
-import b05studio.com.order_boss.view.RestaurantActivity;
 
 /**
  * Created by mansu on 2017-05-26.

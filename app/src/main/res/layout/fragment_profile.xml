@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E9E9E9"
+    >
+
+    <View
+        android:id="@+id/profileUserMain"
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#FFFFFF"
+        >
+    </View>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profileUserImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/icon_jungyun"
+        app:layout_constraintLeft_toLeftOf="@+id/profileUserMain"
+        app:layout_constraintTop_toTopOf="@+id/profileUserMain"
+        app:layout_constraintBottom_toBottomOf="@+id/profileUserMain"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FFA133"
+        />
+
+    <TextView
+        android:id="@+id/profileUserId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="임정연"
+        app:layout_constraintLeft_toLeftOf="@+id/profileUserMain"
+        app:layout_constraintTop_toTopOf="@+id/profileUserMain"
+        android:layout_marginTop="36dp"
+        android:layout_marginLeft="115dp"
+        android:textSize="20sp"
+        android:layout_marginStart="115dp" />
+
+    <TextView
+        android:id="@+id/profileUserPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="010-1234-5678"
+        app:layout_constraintLeft_toLeftOf="@+id/profileUserMain"
+        app:layout_constraintTop_toTopOf="@+id/profileUserMain"
+        android:layout_marginTop="66dp"
+        android:layout_marginLeft="115dp"
+        android:textSize="16sp"
+        android:layout_marginStart="115dp" />
+    
+    <View
+        android:id="@+id/profileMyReportButton"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:background="#FFFFFF"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileUserMain"
+        android:layout_marginTop="16dp"
+         />
+    
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintLeft_toLeftOf="@+id/profileMyReportButton"
+        app:layout_constraintTop_toTopOf="@+id/profileMyReportButton"
+        app:layout_constraintBottom_toBottomOf="@+id/profileMyReportButton"
+        android:layout_marginStart="24dp"
+        android:src="@drawable/icon_my_record"
+        android:background="@null"
+
+        />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="나의 기록"
+        app:layout_constraintLeft_toLeftOf="@+id/profileMyReportButton"
+        app:layout_constraintTop_toTopOf="@+id/profileMyReportButton"
+        app:layout_constraintBottom_toBottomOf="@+id/profileMyReportButton"
+        android:layout_marginStart="63dp"
+        android:textSize="16sp"
+        />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="16dp"
+        app:layout_constraintRight_toRightOf="@+id/profileMyReportButton"
+        app:layout_constraintTop_toTopOf="@+id/profileMyReportButton"
+        app:layout_constraintBottom_toBottomOf="@+id/profileMyReportButton"
+        android:layout_marginEnd="14dp"
+        android:src="@drawable/icon_arrow_right_orange"
+        android:background="@null"
+
+        />
+
+    <View
+        android:id="@+id/profileMySettingButton"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/profileMyReportButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"
+       />
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:layout_constraintLeft_toLeftOf="@+id/profileMySettingButton"
+        app:layout_constraintTop_toTopOf="@+id/profileMySettingButton"
+        app:layout_constraintBottom_toBottomOf="@+id/profileMySettingButton"
+        android:src="@drawable/icon_setting"
+        android:background="@null"
+
+        android:layout_marginStart="24dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/profileMySettingButton"
+        app:layout_constraintTop_toTopOf="@+id/profileMySettingButton"
+        app:layout_constraintBottom_toBottomOf="@+id/profileMySettingButton"
+        android:text="설정"
+        android:textSize="16sp"
+        android:layout_marginStart="63dp"
+        />
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="16dp"
+        app:layout_constraintRight_toRightOf="@+id/profileMyReportButton"
+        app:layout_constraintTop_toTopOf="@+id/profileMySettingButton"
+        app:layout_constraintBottom_toBottomOf="@+id/profileMySettingButton"
+        android:src="@drawable/icon_arrow_right_orange"
+        android:background="@null"
+        android:layout_marginEnd="14dp"
+        />
+
+</android.support.constraint.ConstraintLayout>

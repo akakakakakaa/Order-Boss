@@ -23,7 +23,7 @@ import b05studio.com.order_boss.model.MenuInfo;
 import b05studio.com.order_boss.model.OrderInfo;
 import b05studio.com.order_boss.model.RestaurantInfo;
 import b05studio.com.order_boss.model.User;
-import b05studio.com.order_boss.view.RestaurantActivity;
+import b05studio.com.order_boss.view.activity.RestaurantActivity;
 
 /**
  * Created by mansu on 2017-05-26.

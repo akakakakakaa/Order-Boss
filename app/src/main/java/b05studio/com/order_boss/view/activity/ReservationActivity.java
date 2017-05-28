@@ -1,4 +1,4 @@
-package b05studio.com.order_boss.view;
+package b05studio.com.order_boss.view.activity;
 
 import android.content.Context;
 import android.os.Bundle;

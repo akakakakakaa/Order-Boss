@@ -1,4 +1,4 @@
-package b05studio.com.order_boss.view;
+package b05studio.com.order_boss.view.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,21 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
 import b05studio.com.order_boss.R;
-import b05studio.com.order_boss.model.MenuInfo;
 import b05studio.com.order_boss.model.OrderInfo;
-import b05studio.com.order_boss.model.Review;
 import b05studio.com.order_boss.model.User;
-import b05studio.com.order_boss.view.fragment.RestaurantReviewFragment;
 
 /**
  * Created by mansu on 2017-05-28.
