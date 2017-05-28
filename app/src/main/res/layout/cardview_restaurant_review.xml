@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="31dp"
+    android:paddingBottom="10dp"
+    android:background="@drawable/cardview_restaurant_review">
+    <ImageView
+        android:id="@+id/restaurantReviewProfileImg"
+        android:layout_width="63dp"
+        android:layout_height="63dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/restaurantReviewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="7dp"
+        android:text="임정연"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintLeft_toRightOf="@+id/restaurantReviewProfileImg"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/restaurantReviewDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="6dp"
+        android:text="2017.5.10 / 오후 17:05"
+        android:textSize="14dp"
+        android:textColor="#95989A"
+        app:layout_constraintLeft_toRightOf="@+id/restaurantReviewProfileImg"
+        app:layout_constraintTop_toTopOf="@+id/restaurantReviewName"/>
+    <ImageView
+        android:id="@+id/restaurantReviewRate"
+        android:layout_width="81dp"
+        android:layout_height="13dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginRight="3dp"
+        android:src="@drawable/icon_review_rate_five"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+    <TextView
+        android:id="@+id/restaurantReviewContents"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="동네에 이런 분위기의 술집이 있는 줄 몰랐어요!
+ 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ
+단골해야겠습니다!!!!!!"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantReviewProfileImg"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <ImageView
+        android:id="@+id/restaurantReviewContentsImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:scaleType="fitXY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantReviewContents"
+        app:layout_constraintRight_toRightOf="parent" />
+</android.support.constraint.ConstraintLayout>
