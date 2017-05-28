@@ -8,16 +8,18 @@ import java.util.ArrayList;
 
 public class Review {
     private String userName;
+    private String userProfileUrl;
     private long timestamp;
     private String reviewContent;
-    private ArrayList<String> reviewImgUrls;
+    private String reviewImgUrl;
     private int likeNumber;
 
-    public Review(String userName, long timestamp, String reviewContent, ArrayList<String> reviewImgUrls, int likeNumber) {
+    public Review(String userName, String userProfileUrl, long timestamp, String reviewContent, String reviewImgUrl, int likeNumber) {
         this.userName = userName;
+        this.userProfileUrl = userProfileUrl;
         this.timestamp = timestamp;
         this.reviewContent = reviewContent;
-        this.reviewImgUrls = reviewImgUrls;
+        this.reviewImgUrl = reviewImgUrl;
         this.likeNumber = likeNumber;
     }
 
@@ -45,12 +47,12 @@ public class Review {
         this.reviewContent = reviewContent;
     }
 
-    public ArrayList<String> getReviewImgUrls() {
-        return reviewImgUrls;
+    public String getReviewImgUrls() {
+        return reviewImgUrl;
     }
 
-    public void setReviewImgUrls(ArrayList<String> reviewImgUrls) {
-        this.reviewImgUrls = reviewImgUrls;
+    public void setReviewImgUrls(String reviewImgUrl) {
+        this.reviewImgUrl = reviewImgUrl;
     }
 
     public int getLikeNumber() {
@@ -59,5 +61,13 @@ public class Review {
 
     public void setLikeNumber(int likeNumber) {
         this.likeNumber = likeNumber;
+    }
+
+    public String getUserProfileUrl() {
+        return userProfileUrl;
+    }
+
+    public void setUserProfileUrl(String userProfileUrl) {
+        this.userProfileUrl = userProfileUrl;
     }
 }

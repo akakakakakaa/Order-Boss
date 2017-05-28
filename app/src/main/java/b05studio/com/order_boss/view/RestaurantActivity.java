@@ -1,5 +1,6 @@
 package b05studio.com.order_boss.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -7,10 +8,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ScrollView;
 
 import b05studio.com.order_boss.R;
+import b05studio.com.order_boss.model.Restaurant;
 import b05studio.com.order_boss.view.fragment.RestaurantInfoFragment;
 import b05studio.com.order_boss.view.fragment.RestaurantMenuFragment;
 import b05studio.com.order_boss.view.fragment.RestaurantReviewFragment;
@@ -20,7 +24,7 @@ import b05studio.com.order_boss.view.fragment.RestaurantReviewFragment;
  */
 
 public class RestaurantActivity extends AppCompatActivity {
-    public static WrapContentViewPager viewPager;
+    private WrapContentViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,7 @@ public class RestaurantActivity extends AppCompatActivity {
         setScrollView();
         initToolbar();
         initTabWithViewPager();
+        initReservationButton();
     }
 
     private void setScrollView() {
@@ -59,6 +64,7 @@ public class RestaurantActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                viewPager.reMeasureCurrentPage(tab.getPosition());
             }
 
             @Override
@@ -69,6 +75,17 @@ public class RestaurantActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+            }
+        });
+    }
+
+    private void initReservationButton() {
+        Button reservationBtn = (Button)findViewById(R.id.restaurantReservation);
+        reservationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RestaurantActivity.this, ReservationActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -41,12 +41,6 @@ public class RestaurantMenuFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstance) {
-        super.onActivityCreated(savedInstance);
-        RestaurantActivity.viewPager.reMeasureCurrentPage(0);
-    }
-
     private class RestaurantMenuAdatper extends RecyclerView.Adapter<RestaurantMenuFragment.RestaurantMenuAdatper.ViewHolder> {
         private ArrayList<MenuInfo> menuInfos;
         private Context context;
