@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import b05studio.com.order_boss.R;
 import b05studio.com.order_boss.model.MenuInfo;
 import b05studio.com.order_boss.model.RestaurantInfo;
 import b05studio.com.order_boss.model.Review;
+import b05studio.com.order_boss.view.activity.MainActivity;
 import b05studio.com.order_boss.view.activity.RestaurantActivity;
 
 /**
@@ -31,12 +33,15 @@ import b05studio.com.order_boss.view.activity.RestaurantActivity;
 public class MapFragment extends Fragment {
     private RecyclerView mapRestaurantRecyclerView;
     private RecyclerView.Adapter mapRestaurantAdapter;
+    private TextView mapTitle;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_map, container, false);
 
+        mapTitle = (TextView)rootView.findViewById(R.id.mapTitle);
+        initButton(rootView);
         //for daum map
         MapView mapView = new MapView(getActivity());
         mapView.setDaumMapApiKey(getString(R.string.daum_map_api_key));
@@ -86,16 +91,45 @@ public class MapFragment extends Fragment {
         reviews.add(new Review("3", "임정연", "", 1, "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
                 " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
                 "단골해야겠습니다!!!!!!", "", 5));
+        boolean[] holiday = new boolean[28];
+        for(int i=0; i<28; i++)
+            holiday[i] = false;
+        //첫째 주 일요일
+        holiday[6] = true;
+        //셋째 주 일요일
+        holiday[20] = true;
 
-        restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", 128, "1", 62, 12, 12, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", 133, "1", 62, 12, 22, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", 145, "1", 62, 12, 26, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", 128, "1", 62, 12, 36, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", 133, "1", 62, 12, 40, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", 145, "1", 62, 12, 47, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 22, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 26, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 36, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 40, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 47, reviews, menuInfos));
         mapRestaurantAdapter = new MapRestaurantAdapter(restaurantInfos, getContext(), inflater);
         mapRestaurantRecyclerView.setAdapter(mapRestaurantAdapter);
         return rootView;
+    }
+
+    public void setTitle(String title) {
+        mapTitle.setText("내 주변 " + title);
+    }
+
+    private void initButton(View rootView) {
+        ImageButton mapBackBtn = (ImageButton)rootView.findViewById(R.id.mapBackButton);
+        mapBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.moveToRestaurantListFragment(getActivity().getSupportFragmentManager());
+            }
+        });
+
+        ImageButton filterButton = (ImageButton)rootView.findViewById(R.id.mapFilterButton);
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private class MapRestaurantAdapter extends RecyclerView.Adapter<MapRestaurantAdapter.ViewHolder> {

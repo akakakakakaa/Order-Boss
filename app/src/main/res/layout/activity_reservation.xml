@@ -276,6 +276,7 @@
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
     <Button
+        android:id="@+id/reservationButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="15dp"

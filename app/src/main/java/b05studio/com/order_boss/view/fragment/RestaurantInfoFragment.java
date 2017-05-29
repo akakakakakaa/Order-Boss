@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,7 +33,26 @@ public class RestaurantInfoFragment extends Fragment {
         RestaurantInfoFragment.RestaurantInfoAdatper restaurantMenuAdatper = new RestaurantInfoFragment.RestaurantInfoAdatper(RestaurantInfo.getCurrentRestaurantInfo().getMenuInfos(), getContext(), inflater);
         recyclerView.setAdapter(restaurantMenuAdatper);
 
+        initRestaurantInfo(rootView);
         return rootView;
+    }
+
+    private void initRestaurantInfo(View rootView) {
+        RestaurantInfo info = RestaurantInfo.getCurrentRestaurantInfo();
+
+        //TODO:2017-05-29 지도 가져오는것 필요
+        FrameLayout mapLayout = (FrameLayout)rootView.findViewById(R.id.restaurantInfoMap);
+        TextView address = (TextView)rootView.findViewById(R.id.restaurantInfoAddress);
+        TextView phoneNum = (TextView)rootView.findViewById(R.id.restaurantInfoPhoneNum);
+        TextView businessHours = (TextView)rootView.findViewById(R.id.restaurantInfoTime);
+        TextView holiday = (TextView)rootView.findViewById(R.id.restaurantInfoHoliday);
+        TextView avgPrice = (TextView)rootView.findViewById(R.id.restaurantInfoPrice);
+
+        address.setText(info.getAddress());
+        phoneNum.setText(info.getPhoneNum());
+        businessHours.setText(info.getStartHour() + ":" + info.getStartMinute() + " ~ " + info.getEndHour() + ":" + info.getEndMinute());
+        holiday.setText(info.getHolidayString());
+        avgPrice.setText(info.getAvgPrice());
     }
 
     private class RestaurantInfoAdatper extends RecyclerView.Adapter<RestaurantInfoFragment.RestaurantInfoAdatper.ViewHolder> {
