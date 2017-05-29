@@ -25,6 +25,7 @@ import b05studio.com.order_boss.model.RestaurantInfo;
 import b05studio.com.order_boss.model.Review;
 import b05studio.com.order_boss.view.activity.MainActivity;
 import b05studio.com.order_boss.view.activity.RestaurantActivity;
+import b05studio.com.order_boss.view.activity.SearchActivity;
 
 /**
  * Created by young on 2017-05-16.
@@ -34,6 +35,7 @@ public class MapFragment extends Fragment {
     private RecyclerView mapRestaurantRecyclerView;
     private RecyclerView.Adapter mapRestaurantAdapter;
     private TextView mapTitle;
+    private String mapTitleString;
 
     @Nullable
     @Override
@@ -41,6 +43,8 @@ public class MapFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_map, container, false);
 
         mapTitle = (TextView)rootView.findViewById(R.id.mapTitle);
+        if(mapTitleString != null)
+            mapTitle.setText(mapTitleString);
         initButton(rootView);
         //for daum map
         MapView mapView = new MapView(getActivity());
@@ -111,7 +115,8 @@ public class MapFragment extends Fragment {
     }
 
     public void setTitle(String title) {
-        mapTitle.setText("내 주변 " + title);
+        if(mapTitle != null)
+            mapTitle.setText("내 주변 " + title);
     }
 
     private void initButton(View rootView) {
@@ -127,7 +132,8 @@ public class MapFragment extends Fragment {
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                //startActivityForResult(intent);
             }
         });
     }

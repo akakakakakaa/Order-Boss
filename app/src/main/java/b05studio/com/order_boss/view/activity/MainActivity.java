@@ -1,6 +1,8 @@
 package b05studio.com.order_boss.view.activity;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         myReservationFragment = new MyReservationFragment();
         profileFragment = new ProfileFragment();
 
-        firstTabSwitching = 0;
+        firstTabSwitching = 1;
         getSupportFragmentManager().beginTransaction().replace(R.id.container, restaurantListFragment).commit();
     }
 
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     default:
                         break;
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.container,currentSelectedFragment).addToBackStack(null).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.container,currentSelectedFragment).commit();
             }
 
             @Override
@@ -106,13 +108,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void moveToMapFragment(FragmentManager fm, String title) {
-        fm.beginTransaction().replace(R.id.container, mapFragment).addToBackStack(null).commit();
+        fm.beginTransaction().replace(R.id.container, mapFragment).commit();
         mapFragment.setTitle(title);
         firstTabSwitching = 0;
     }
 
     public static void moveToRestaurantListFragment(FragmentManager fm) {
-        fm.beginTransaction().replace(R.id.container, restaurantListFragment).addToBackStack(null).commit();
+        fm.beginTransaction().replace(R.id.container, restaurantListFragment).commit();
         firstTabSwitching = 1;
     }
 
@@ -158,6 +160,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     */
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == RestaurantListFragment.SEARCH) {
+            if(resultCode == Activity.RESULT_OK)
+                restaurantListFragment.searchKeyword(data.getStringExtra("keyword"));
+        }
+    }
 
     @Override
     protected void attachBaseContext(Context newBase) {

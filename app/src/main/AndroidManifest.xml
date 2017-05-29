@@ -22,8 +22,8 @@
         <activity android:name=".view.activity.RestaurantActivity" />
         <activity android:name=".view.activity.ReservationActivity" />
         <activity android:name=".view.activity.SettingActivity" />
-        <activity android:name=".view.activity.MyRecordActivity"></activity>
->>>>>>> 03ee33dc16017cf8839154a51af1ab05ea1c2659
+        <activity android:name=".view.activity.MyRecordActivity" />
+        <activity android:name=".view.activity.SearchActivity" />
     </application>
 
 </manifest>
