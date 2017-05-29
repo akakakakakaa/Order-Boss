@@ -1,6 +1,8 @@
 package b05studio.com.order_boss.view.activity;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,11 +45,33 @@ public class MainActivity extends AppCompatActivity {
     private void initBottomNaviBar() {
         BottomNavigationBar bottomNavigationBar;
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.mainBottomNavigationBar);
-        BottomNavigationItem firstBottomItem = new BottomNavigationItem(R.drawable .icon_main_checked);
+
+        BottomNavigationItem firstBottomItem = new BottomNavigationItem(R.drawable.icon_main_checked);
+        Drawable inActiveIcon1 = getResources().getDrawable(R.drawable.icon_main_unchecked);
+        inActiveIcon1.setTint(Color.parseColor("#888888"));
+        firstBottomItem.setInactiveIcon(inActiveIcon1);
+        //firstBottomItem.setInactiveIcon(getResources().getDrawable(R.drawable.icon_main_empty));
+        //firstBottomItem.setInActiveColor(Color.parseColor("#888888"));
+
+
+        BottomNavigationItem secondBottomItem = new BottomNavigationItem(R.drawable.icon_order_list_checked);
+        Drawable inActiveIcon2 = getResources().getDrawable(R.drawable.icon_order_list_unckecked);
+        inActiveIcon2.setTint(Color.parseColor("#888888"));
+        secondBottomItem.setInactiveIcon(inActiveIcon2);
+       // secondBottomItem.setInActiveColor(Color.parseColor("#888888"));
+
+        BottomNavigationItem thirdBottomItem = new BottomNavigationItem(R.drawable.icon_profile_checked);
+        Drawable inActiveIcon3 = getResources().getDrawable(R.drawable.icon_profile_unchecked);
+        inActiveIcon3.setTint(Color.parseColor("#888888"));
+        thirdBottomItem.setInactiveIcon(inActiveIcon3);
+       // thirdBottomItem.setInactiveIcon(getResources().getDrawable(R.drawable.icon_profile_unchecked));
+       // thirdBottomItem.setInActiveColor(Color.parseColor("#888888"));
+
        // firstBottomItem.setInactiveIcon()
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable .icon_main_checked));
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.icon_order_list_checked));
-        bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.icon_profile_checked)).initialise();
+        bottomNavigationBar
+                .addItem(firstBottomItem)
+                .addItem(secondBottomItem)
+                .addItem(thirdBottomItem).initialise();
 
         bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
             @Override
