@@ -8,21 +8,25 @@ import java.util.ArrayList;
 
 public class Review {
     private String reviewId;
+
     private String userName;
     private String userProfileUrl;
     private long timestamp;
+    private String restarauntName;
     private String reviewContent;
     private String reviewImgUrl;
     private int likeNumber;
 
-    public Review(String reviewId, String userName, String userProfileUrl, long timestamp, String reviewContent, String reviewImgUrl, int likeNumber) {
+    public Review(String reviewId, String userName, String userProfileUrl, long timestamp, String restarauntName, String reviewContent, String reviewImgUrl, int likeNumber) {
         this.reviewId = reviewId;
         this.userName = userName;
         this.userProfileUrl = userProfileUrl;
         this.timestamp = timestamp;
+        this.restarauntName = restarauntName;
         this.reviewContent = reviewContent;
         this.reviewImgUrl = reviewImgUrl;
         this.likeNumber = likeNumber;
+
     }
 
     public String getReviewId() {
@@ -79,5 +83,13 @@ public class Review {
 
     public void setUserProfileUrl(String userProfileUrl) {
         this.userProfileUrl = userProfileUrl;
+    }
+
+    public String getRestarauntName() {
+        return restarauntName;
+    }
+
+    public void setRestarauntName(String restarauntName) {
+        this.restarauntName = restarauntName;
     }
 }

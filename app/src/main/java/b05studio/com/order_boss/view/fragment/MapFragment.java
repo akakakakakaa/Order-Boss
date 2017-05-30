@@ -94,16 +94,16 @@ public class MapFragment extends Fragment {
         menuInfos.add(new MenuInfo("", "생맥주 500cc", 6000));
         /* for test reviews */
         ArrayList<Review> reviews = new ArrayList<>();
-        reviews.add(new Review("0", "임정연", "", 1, "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
+        reviews.add(new Review("0", "임정연", "", 1,"", "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
                 " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
                 "단골해야겠습니다!!!!!!", "", 5));
-        reviews.add(new Review("1", "임정연", "", 1, "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
+        reviews.add(new Review("1", "임정연", "", 1, "","동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
                 " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
                 "단골해야겠습니다!!!!!!", "", 5));
-        reviews.add(new Review("2", "임정연", "", 1, "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
+        reviews.add(new Review("2", "임정연", "", 1, "","동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
                 " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
                 "단골해야겠습니다!!!!!!", "", 5));
-        reviews.add(new Review("3", "임정연", "", 1, "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
+        reviews.add(new Review("3", "임정연", "", 1, "","동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
                 " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
                 "단골해야겠습니다!!!!!!", "", 5));
         boolean[] holiday = new boolean[28];
