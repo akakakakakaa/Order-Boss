@@ -46,6 +46,7 @@ public class RestaurantListFragment extends Fragment {
     private ArrayList<RestaurantInfo> keywordInfos;
     private String currentDistance = "500m";
     private Button choosedBtn;
+    private Button searchBtn;
 
     @Nullable
     @Override
@@ -173,12 +174,12 @@ public class RestaurantListFragment extends Fragment {
             }
         });
 
-        Button listSearchBtn = (Button)rootView.findViewById(R.id.restaurantListSearch);
-        listSearchBtn.setOnClickListener(new View.OnClickListener() {
+        searchBtn = (Button)rootView.findViewById(R.id.restaurantListSearch);
+        searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
-                startActivityForResult(intent, SEARCH);
+                startActivity(intent);
             }
         });
     }
@@ -189,20 +190,6 @@ public class RestaurantListFragment extends Fragment {
         this.currentDistance = currentDistance;
         button.setTextColor(getResources().getColor(R.color.colorPrimary));
         choosedBtn = button;
-    }
-
-    public void searchKeyword(String keyword) {
-        keywordInfos = new ArrayList<>();
-        for(int i=0; i<restaurantInfos.size(); i++) {
-            ArrayList<String> foodTag = restaurantInfos.get(i).getFoodTag();
-            for(int j=0; j<foodTag.size(); j++)
-                if(foodTag.get(j).indexOf(keyword) != -1) {
-                    keywordInfos.add((restaurantInfos.get(i)));
-                    break;
-                }
-        }
-
-        restaurantListAdapter.setInfos(keywordInfos);
     }
 
     private class RestaurantListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

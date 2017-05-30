@@ -190,14 +190,6 @@ public class MainActivity extends AppCompatActivity {
     */
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == RestaurantListFragment.SEARCH) {
-            if(resultCode == Activity.RESULT_OK)
-                restaurantListFragment.searchKeyword(data.getStringExtra("keyword"));
-        }
-    }
-
-    @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
     }
