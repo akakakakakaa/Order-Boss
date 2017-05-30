@@ -13,12 +13,12 @@ import retrofit2.http.Query;
 
 public interface DaumService {
     @GET("local/v1/search/keyword.json")
-    Call<List<DaumLocalInfo>> listKeywordRestaurant(
+    Call<DaumLocalInfo> listKeywordRestaurant(
              @Query("apikey") String apikey,
-             @Query("query") String query,
-             @Query("location") String location,
-             @Query("radius") int radius
-             );
+             @Query("query") String query);
+       //      @Query("location") String location,
+       //      @Query("radius") int radius
+
 
     // TODO: 2017-05-29  식당 태그별 카테고리 만들기.
     // 일반 음식점 코드 FD6

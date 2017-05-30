@@ -14,8 +14,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 import b05studio.com.order_boss.R;
+import b05studio.com.order_boss.model.User;
 import b05studio.com.order_boss.view.WrapContentViewPager;
 import b05studio.com.order_boss.view.fragment.RestaurantInfoFragment;
 import b05studio.com.order_boss.view.fragment.RestaurantMenuFragment;
@@ -34,13 +36,13 @@ public class RestaurantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
 
-        setScrollView();
+        initScrollView();
         initToolbar();
         initTabWithViewPager();
         initButtons();
     }
 
-    private void setScrollView() {
+    private void initScrollView() {
         ScrollView scrollView = (ScrollView)findViewById(R.id.restaurantScrollView);
         scrollView.setFocusableInTouchMode(true);
         scrollView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
@@ -83,12 +85,16 @@ public class RestaurantActivity extends AppCompatActivity {
     }
 
     private void initButtons() {
-        Button reservationBtn = (Button)findViewById(R.id.restaurantReservation);
+        Button reservationBtn = (Button)findViewById(R.id.restaurantReservationButton);
         reservationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RestaurantActivity.this, ReservationActivity.class);
-                startActivity(intent);
+                if(User.getCurrentUser().getCurrentOrderInfos().size() == 0)
+                    Toast.makeText(RestaurantActivity.this, "메뉴를 선택해 주세요.", Toast.LENGTH_SHORT).show();
+                else {
+                    Intent intent = new Intent(RestaurantActivity.this, ReservationActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -97,6 +103,19 @@ public class RestaurantActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        Button restaurantShoppingBtn = (Button)findViewById(R.id.restaurantShoppingButton);
+        restaurantShoppingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(User.getCurrentUser().getCurrentOrderInfos().size() == 0)
+                    Toast.makeText(RestaurantActivity.this, "메뉴를 선택해 주세요.", Toast.LENGTH_SHORT).show();
+                else {
+                    Intent intent = new Intent(RestaurantActivity.this, BasketActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }

@@ -72,60 +72,104 @@ public class RestaurantMenuFragment extends Fragment {
             holder.restaurantMenuWrapper.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    View popupView = inflater.inflate(R.layout.popup_restaurant_menu_choose, null);
-                    RestaurantActivity.popupWindow = new PopupWindow(popupView, RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.MATCH_PARENT);
-
-                    ConstraintLayout background = (ConstraintLayout)popupView.findViewById(R.id.restaurantMenuChooseBackground);
-                    ImageView menuImg = (ImageView)popupView.findViewById(R.id.restaurantMenuChooseImg);
-                    TextView menuName = (TextView)popupView.findViewById(R.id.restaurantMenuChooseName);
-                    final TextView menuPrice = (TextView)popupView.findViewById(R.id.restaurantMenuChoosePrice);
-                    final TextView menuNum = (TextView)popupView.findViewById(R.id.restaurantMenuChooseNum);
-                    ImageButton addBtn = (ImageButton)popupView.findViewById(R.id.restaurantMenuChooseAdd);
-                    ImageButton subtractionBtn = (ImageButton)popupView.findViewById(R.id.restaurantMenuChooseSubtraction);
-                    Button addToBasketBtn = (Button)popupView.findViewById(R.id.restaurantMenuChooseAddToBasketButton);
-
-                    background.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            RestaurantActivity.popupWindow.dismiss();
-                        }
-                    });
-                    menuImg.setImageResource(R.drawable.restaurant_info_test_image1);
-                    menuName.setText(menuInfo.getName());
-                    menuPrice.setText(menuInfo.getPrice()+"원");
-                    menuNum.setText("1개");
-                    selectedNum = 1;
-                    addBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            selectedNum++;
-                            menuNum.setText(selectedNum+"개");
-                            menuPrice.setText(menuInfo.getPrice()*selectedNum+"원");
-                        }
-                    });
-                   subtractionBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            if(selectedNum > 1) {
-                                selectedNum--;
-                                menuNum.setText(selectedNum+"개");
-                                menuPrice.setText(menuInfo.getPrice()*selectedNum+"원");
-                            }
-                        }
-                    });
-                    addToBasketBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            User.getCurrentUser().getCurrentOrderInfos().add(new OrderInfo(RestaurantInfo.getCurrentRestaurantInfo().getId(), menuInfo, selectedNum));
-                        }
-                    });
-
-                    RestaurantActivity.popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+                    ArrayList<OrderInfo> orderInfos = User.getCurrentUser().getCurrentOrderInfos();
+                    if(orderInfos.size() == 0 || orderInfos.get(0).getRestaurantId().compareTo(RestaurantInfo.getCurrentRestaurantInfo().getId()) == 0)
+                        showMenuChoosePopup(menuInfo);
+                    else
+                        showDeleteYesOrNoPopupView(menuInfo);
                 }
             });
             holder.restaurantMenuImage.setImageResource(R.drawable.restaurant_info_test_image1);
             holder.restaurantMenuName.setText(menuInfo.getName());
             holder.restaurantMenuPrice.setText(menuInfo.getPrice() + "원");
+        }
+
+        private void showMenuChoosePopup(final MenuInfo menuInfo) {
+            View popupView = inflater.inflate(R.layout.popup_restaurant_menu_choose, null);
+            RestaurantActivity.popupWindow = new PopupWindow(popupView, RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.MATCH_PARENT);
+
+            ConstraintLayout background = (ConstraintLayout) popupView.findViewById(R.id.restaurantMenuChooseBackground);
+            ImageView menuImg = (ImageView) popupView.findViewById(R.id.restaurantMenuChooseImg);
+            TextView menuName = (TextView) popupView.findViewById(R.id.restaurantMenuChooseName);
+            final TextView menuPrice = (TextView) popupView.findViewById(R.id.restaurantMenuChoosePrice);
+            final TextView menuNum = (TextView) popupView.findViewById(R.id.restaurantMenuChooseNum);
+            ImageButton addBtn = (ImageButton) popupView.findViewById(R.id.restaurantMenuChooseAdd);
+            ImageButton subtractionBtn = (ImageButton) popupView.findViewById(R.id.restaurantMenuChooseSubtraction);
+            Button addToBasketBtn = (Button) popupView.findViewById(R.id.restaurantMenuChooseAddToBasketButton);
+
+            background.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    RestaurantActivity.popupWindow.dismiss();
+                    RestaurantActivity.popupWindow = null;
+                }
+            });
+            menuImg.setImageResource(R.drawable.restaurant_info_test_image1);
+            menuName.setText(menuInfo.getName());
+            menuPrice.setText(menuInfo.getPrice() + "원");
+            menuNum.setText("1개");
+            selectedNum = 1;
+            addBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    selectedNum++;
+                    menuNum.setText(selectedNum + "개");
+                    menuPrice.setText(menuInfo.getPrice() * selectedNum + "원");
+                }
+            });
+            subtractionBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (selectedNum > 1) {
+                        selectedNum--;
+                        menuNum.setText(selectedNum + "개");
+                        menuPrice.setText(menuInfo.getPrice() * selectedNum + "원");
+                    }
+                }
+            });
+            addToBasketBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    User.getCurrentUser().getCurrentOrderInfos().add(new OrderInfo(RestaurantInfo.getCurrentRestaurantInfo().getId(), menuInfo, selectedNum));
+                    RestaurantActivity.popupWindow.dismiss();
+                    RestaurantActivity.popupWindow = null;
+                }
+            });
+
+            RestaurantActivity.popupWindow.showAtLocation(popupView, Gravity.CENTER, 0, 0);
+        }
+
+        private void showDeleteYesOrNoPopupView(final MenuInfo menuInfo) {
+            View popupView = inflater.inflate(R.layout.popup_restaurant_menu_delete, null);
+            RestaurantActivity.popupWindow = new PopupWindow(popupView, RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.MATCH_PARENT);
+
+            ConstraintLayout background = (ConstraintLayout)popupView.findViewById(R.id.restaurantMenuDeleteBackground);
+            Button deleteOkBtn = (Button)popupView.findViewById(R.id.restaurantMenuDeleteOk);
+            Button deleteCancelBtn = (Button)popupView.findViewById(R.id.restaurantMenuDeleteCancel);
+
+            background.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    RestaurantActivity.popupWindow.dismiss();
+                    RestaurantActivity.popupWindow = null;
+                }
+            });
+            deleteOkBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    User.getCurrentUser().getCurrentOrderInfos().clear();
+                    RestaurantActivity.popupWindow.dismiss();
+                    RestaurantActivity.popupWindow = null;
+                    showMenuChoosePopup(menuInfo);
+                }
+            });
+            deleteCancelBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    RestaurantActivity.popupWindow.dismiss();
+                    RestaurantActivity.popupWindow = null;
+                }
+            });
         }
 
         @Override

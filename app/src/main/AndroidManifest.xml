@@ -22,7 +22,8 @@
         <activity android:name=".view.activity.RestaurantActivity" />
         <activity android:name=".view.activity.ReservationActivity" />
         <activity android:name=".view.activity.SettingActivity" />
-        <activity android:name=".view.activity.MyRecordActivity"></activity>
+        <activity android:name=".view.activity.MyRecordActivity" />
+        <activity android:name=".view.activity.SearchActivity" />
     </application>
 
 </manifest>

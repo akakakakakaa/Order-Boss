@@ -8,7 +8,7 @@
         android:id="@+id/restaurantToolbar"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:background="@android:color/white"
+        android:background="#F8F8F8"
         android:theme="?attr/actionBarTheme"
         android:layout_margin="0dp"
         android:padding="0dp"
@@ -61,7 +61,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/restaurantToolbar"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/restaurantReservation">
+        app:layout_constraintBottom_toTopOf="@+id/restaurantReservationButton">
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
     <Button
-        android:id="@+id/restaurantReservation"
+        android:id="@+id/restaurantReservationButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingTop="17dp"
@@ -151,10 +151,10 @@
         android:background="#FFC27B"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/restaurantShopping"
+        app:layout_constraintRight_toLeftOf="@+id/restaurantShoppingButton"
         app:layout_constraintBottom_toBottomOf="parent" />
     <Button
-        android:id="@+id/restaurantShopping"
+        android:id="@+id/restaurantShoppingButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingTop="17dp"
@@ -164,7 +164,7 @@
         android:textColor="@android:color/white"
         android:background="@color/colorPrimary"
         app:layout_constraintHorizontal_weight="3"
-        app:layout_constraintLeft_toRightOf="@+id/restaurantReservation"
+        app:layout_constraintLeft_toRightOf="@+id/restaurantReservationButton"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 </android.support.constraint.ConstraintLayout>

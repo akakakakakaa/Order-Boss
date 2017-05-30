@@ -10,3 +10,10 @@ import retrofit2.Retrofit;
  * Created by young on 2017-05-29.
  */
 
+public class DaumRetrofit  {
+
+
+
+
+
+}
