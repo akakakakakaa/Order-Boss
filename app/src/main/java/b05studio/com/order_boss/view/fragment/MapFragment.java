@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,24 +19,34 @@ import android.widget.TextView;
 import net.daum.mf.map.api.MapView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import b05studio.com.order_boss.R;
+import b05studio.com.order_boss.model.DaumLocalInfo;
 import b05studio.com.order_boss.model.MenuInfo;
 import b05studio.com.order_boss.model.RestaurantInfo;
 import b05studio.com.order_boss.model.Review;
+import b05studio.com.order_boss.network.DaumService;
+import b05studio.com.order_boss.network.DaumServiceGenerator;
 import b05studio.com.order_boss.view.activity.MainActivity;
 import b05studio.com.order_boss.view.activity.RestaurantActivity;
 import b05studio.com.order_boss.view.activity.SearchActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by young on 2017-05-16.
  */
 
 public class MapFragment extends Fragment {
+    private static final String TAG = "MAPFRAGMENT";
     private RecyclerView mapRestaurantRecyclerView;
     private RecyclerView.Adapter mapRestaurantAdapter;
     private TextView mapTitle;
     private String mapTitleString;
+    private DaumService daumService;
 
     @Nullable
     @Override
@@ -102,6 +113,28 @@ public class MapFragment extends Fragment {
         holiday[6] = true;
         //셋째 주 일요일
         holiday[20] = true;
+
+        // TODO: 2017-05-30 GPS 받아와야함. 
+
+        daumService = DaumServiceGenerator.createService(DaumService.class);
+        Call<DaumLocalInfo> daumLocalInfos = daumService.listKeywordRestaurant(getString(R.string.daum_map_api_key),"한식");
+        daumLocalInfos.enqueue(new Callback<DaumLocalInfo>() {
+                                   @Override
+                                   public void onResponse(Call<DaumLocalInfo> call, Response<DaumLocalInfo> response) {
+                                       if(response.isSuccessful()) {
+                                           // TODO: 2017-05-30 만수야 여기 정보다 너어놨다. 
+                                            Log.d(TAG, response.body().getChannel().getItem().toString());
+                                       } else {
+                                           Log.d(TAG, response.code() + "");
+                                       }
+                                   }
+
+                                   @Override
+                                   public void onFailure(Call<DaumLocalInfo> call, Throwable t) {
+                                       Log.d(TAG,call.toString());
+                                   }
+                               });
+
 
         restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
         restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 22, reviews, menuInfos));

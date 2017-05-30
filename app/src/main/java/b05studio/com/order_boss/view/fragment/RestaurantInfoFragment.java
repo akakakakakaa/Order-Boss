@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,15 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import b05studio.com.order_boss.R;
+import b05studio.com.order_boss.model.DaumLocalInfo;
 import b05studio.com.order_boss.model.MenuInfo;
 import b05studio.com.order_boss.model.RestaurantInfo;
+import b05studio.com.order_boss.network.DaumService;
+import retrofit2.Call;
+import retrofit2.Retrofit;
 
 /**
  * Created by mansu on 2017-05-26.
@@ -41,6 +47,9 @@ public class RestaurantInfoFragment extends Fragment {
         RestaurantInfo info = RestaurantInfo.getCurrentRestaurantInfo();
 
         //TODO:2017-05-29 지도 가져오는것 필요
+
+
+
         FrameLayout mapLayout = (FrameLayout)rootView.findViewById(R.id.restaurantInfoMap);
         TextView address = (TextView)rootView.findViewById(R.id.restaurantInfoAddress);
         TextView phoneNum = (TextView)rootView.findViewById(R.id.restaurantInfoPhoneNum);

@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "b05studio.com.order_boss"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -36,6 +36,8 @@ dependencies {
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.4.1'
     compile 'com.tsengvn:typekit:1.0.1'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.google.code.gson:gson:2.7'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     testCompile 'junit:junit:4.12'
 }
