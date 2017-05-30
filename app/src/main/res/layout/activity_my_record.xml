@@ -57,17 +57,80 @@
         android:textSize="16sp"
         android:layout_marginStart="115dp" />
 
-    <com.ashokvarma.bottomnavigation.BottomNavigationBar
-        android:id="@+id/profileNavigationBar"
+    <View
+        android:id="@+id/myRecordButtonView"
         android:layout_width="0dp"
         android:layout_height="60dp"
+        android:layout_marginTop="1dp"
+        android:background="#FFFFFF"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileUserMain"
-        android:layout_marginTop="1dp"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/profileUserMain" />
 
-    </com.ashokvarma.bottomnavigation.BottomNavigationBar>
+    <android.support.constraint.Guideline
+        android:id="@+id/myRecordGuideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.5"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="192dp" />
+
+    <ImageView
+        android:id="@+id/myRecordRestauratButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/myRecordButtonView"
+        app:layout_constraintTop_toTopOf="@+id/myRecordButtonView"
+        app:layout_constraintBottom_toBottomOf="@+id/myRecordButtonView"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"
+        android:src="@drawable/icon_my_restaurant_checked"
+        app:layout_constraintRight_toLeftOf="@+id/myRecordGuideLine">
+    </ImageView>
+    
+    <View
+        android:id="@+id/myRecordRestauratButtonBottomView"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="#FFA133"
+        app:layout_constraintLeft_toLeftOf="@+id/myRecordButtonView"
+        app:layout_constraintBottom_toBottomOf="@+id/myRecordButtonView"
+        app:layout_constraintRight_toLeftOf="@+id/myRecordGuideLine" />
+
+    <ImageView
+        android:id="@+id/myRecordReviewButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/myRecordGuideLine"
+        app:layout_constraintRight_toRightOf="@+id/myRecordButtonView"
+        app:layout_constraintTop_toTopOf="@+id/myRecordButtonView"
+        app:layout_constraintBottom_toBottomOf="@+id/myRecordButtonView"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"
+        android:src="@drawable/icon_my_review_unchecked"
+        >
+    </ImageView>
+
+    <View
+        android:id="@+id/myRecordReviewButtonBottomView"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="#FFFFFF"
+        app:layout_constraintLeft_toLeftOf="@+id/myRecordGuideLine"
+        app:layout_constraintRight_toRightOf="@+id/myRecordButtonView"
+        app:layout_constraintBottom_toBottomOf="@+id/myRecordButtonView"
+        />
+
+    <FrameLayout
+        android:id="@+id/myRecordFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@+id/myRecordReviewButtonBottomView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 
 </android.support.constraint.ConstraintLayout>
