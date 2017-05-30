@@ -5,6 +5,9 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -26,7 +29,7 @@ public class MyRecordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_record);
 
         initFragment();
-        initBotttomBar();
+        initButton();
     }
 
     private void initFragment()  {
@@ -35,48 +38,36 @@ public class MyRecordActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.myRecordFragment, myRecordRestrauantFragment).commit();
     }
 
-    private void initBotttomBar() {
-        BottomNavigationBar bottomNavigationBar;
-        bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.profileNavigationBar);
+    private void initButton() {
+        final ImageView myRestaruantButton = (ImageView) findViewById(R.id.myRecordRestauratButton);
+        final View myRestaruantButtonBottom = findViewById(R.id.myRecordRestauratButtonBottomView);
 
-        BottomNavigationItem firstBottomItem = new BottomNavigationItem(R.drawable.icon_my_restaurant_checked);
-        Drawable inActiveIcon1 = getResources().getDrawable(R.drawable.icon_my_restaurant_unchecked);
-        inActiveIcon1.setTint(Color.parseColor("#888888"));
-        firstBottomItem.setInactiveIcon(inActiveIcon1);
+        final ImageView myReviewButton = (ImageView) findViewById(R.id.myRecordReviewButton);
+        final View myReviewButtonBottom = findViewById(R.id.myRecordReviewButtonBottomView);
 
-        BottomNavigationItem secondBottomItem = new BottomNavigationItem(R.drawable.icon_my_review_checked);
-        Drawable inActiveIcon2 = getResources().getDrawable(R.drawable.icon_my_review_unchecked);
-        inActiveIcon2.setTint(Color.parseColor("#888888"));
-        secondBottomItem.setInactiveIcon(inActiveIcon2);
-
-        bottomNavigationBar
-                .addItem(firstBottomItem)
-                .addItem(secondBottomItem).initialise();
-
-        bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener() {
+        myRestaruantButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTabSelected(int position) {
-                switch (position) {
-                    case 0:
-                        currentSelectedFragment = myRecordRestrauantFragment;
-                        break;
-                    case 1:
-                        currentSelectedFragment = myRecordReviewFragment;
-                        break;
-                    default:
-                        break;
-                }
-                getSupportFragmentManager().beginTransaction().replace(R.id.myRecordFragment,currentSelectedFragment).commit();
+            public void onClick(View v) {
+                myRestaruantButton.setImageResource(R.drawable.icon_my_restaurant_checked);
+                myRestaruantButtonBottom.setBackgroundColor(Color.parseColor("#FFA133"));
+
+                myReviewButton.setImageResource(R.drawable.icon_my_review_unchecked);
+                myReviewButtonBottom.setBackgroundColor(Color.parseColor("#FFFFFF"));
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.myRecordFragment, myRecordRestrauantFragment).commit();
             }
+        });
 
+        myReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTabUnselected(int position) {
+            public void onClick(View v) {
+                myRestaruantButton.setImageResource(R.drawable.icon_my_restaurant_unchecked);
+                myRestaruantButtonBottom.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
-            }
+                myReviewButton.setImageResource(R.drawable.icon_my_review_checked);
+                myReviewButtonBottom.setBackgroundColor(Color.parseColor("#FFA133"));
 
-            @Override
-            public void onTabReselected(int position) {
-
+                getSupportFragmentManager().beginTransaction().replace(R.id.myRecordFragment, myRecordReviewFragment).commit();
             }
         });
 
