@@ -57,6 +57,7 @@ public class RestaurantListFragment extends Fragment {
         //for restaurant list
         restaurantListRecyclerView = (RecyclerView)rootView.findViewById(R.id.restaurantListRecyclerView);
         restaurantListRecyclerView.setHasFixedSize(true);
+        restaurantListRecyclerView.scrollToPosition(0);
 
         restaurantInfos = new ArrayList<>();
         //TODO: 2017-05-17 파이어베이스에서 레스토랑 데이터 들고오는 것 필요함.
@@ -294,6 +295,7 @@ public class RestaurantListFragment extends Fragment {
                     ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) cardLayout.getLayoutParams();
                     params.width = 0;
                     params.startToStart = R.id.restaurantListDivider;
+
                     params.endToEnd = R.id.restaurantListDivider;
                     params.leftToLeft = R.id.restaurantListDivider;
                     params.topToBottom = R.id.restaurantListDividerTitle;
