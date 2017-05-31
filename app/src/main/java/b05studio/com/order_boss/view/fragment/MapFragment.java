@@ -73,6 +73,8 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         ViewGroup mapViewContainer = (ViewGroup) rootView.findViewById(R.id.mapView);
         mapViewContainer.addView(mapView);
 
+
+
 //
        // Log.d("여기","init 완료");
        // mapView.setMapCenterPoint(MapPoint.mapPointWithCONGCoord(LocationTracker.getCurLoc().getLatitude(), LocationTracker.getCurLoc().getLongitude()),true);
@@ -197,6 +199,13 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         Double lat = LocationTracker.getCurLoc().getLatitude();
         Double lon = LocationTracker.getCurLoc().getLongitude();
         mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(lat, lon) , true);
+
+        MapPOIItem marker = new MapPOIItem();
+        marker.setItemName("Default Marker");
+        marker.setTag(0);
+        marker.setMapPoint(MapPoint.mapPointWithGeoCoord(lat, lon));
+        marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
+        mapView.addPOIItem(marker);
     }
 
     @Override
