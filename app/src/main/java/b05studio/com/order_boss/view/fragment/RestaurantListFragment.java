@@ -21,6 +21,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -109,12 +111,12 @@ public class RestaurantListFragment extends Fragment {
         //셋째 주 일요일
         holiday[20] = true;
 
-        restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 22, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 26, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 36, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 40, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 47, reviews, menuInfos));
+        //restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
+        //restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 22, reviews, menuInfos));
+        //restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 26, reviews, menuInfos));
+        //restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 36, reviews, menuInfos));
+        //restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 40, reviews, menuInfos));
+        //restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 47, reviews, menuInfos));
 
         restaurantListAdapter = new RestaurantListAdapter(restaurantInfos, getContext(), inflater);
         restaurantListRecyclerView.setAdapter(restaurantListAdapter);
@@ -311,9 +313,7 @@ public class RestaurantListFragment extends Fragment {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             Log.d(TAG, "onBindViewHolder");
             final RestaurantInfo restaurantInfo = restaurantInfos.get(position);
-            ArrayList<String> foodTag = restaurantInfo.getFoodTag();
-
-            String foodTagStr = "";
+            String foodTag = restaurantInfo.getFoodTag();
             switch (holder.getItemViewType()) {
                 case 0:
                     ViewHolder viewHolder = (ViewHolder)holder;
@@ -325,12 +325,9 @@ public class RestaurantListFragment extends Fragment {
                             startActivity(intent);
                         }
                     });
-                    //Picasso.with(context).load(restaurant.getImageUrl()).into(holder.mapRestaurantImageView);
+                    Picasso.with(context).load(restaurantInfo.getImageUrl()).into(((ViewHolder) holder).restaurantListImageView);
                     viewHolder.restaurantListName.setText((position + 1)+". "+restaurantInfo.getName());
-                    for(int i=0; i<foodTag.size()-1; i++)
-                        foodTagStr += foodTag.get(i) + " > ";
-                    foodTagStr += foodTag.get(foodTag.size()-1);
-                    viewHolder.restaurantListFoodTag.setText(foodTagStr);
+                    viewHolder.restaurantListFoodTag.setText(foodTag);
                     viewHolder.restaurantListLikeNumber.setText(Integer.toString(restaurantInfo.getLikeNumber()));
                     viewHolder.restaurantListReviewNumber.setText(Integer.toString(restaurantInfo.getReviewNumber()));
                     viewHolder.restaurantListTime.setText(Integer.toString(restaurantInfo.getTime()));
@@ -349,10 +346,7 @@ public class RestaurantListFragment extends Fragment {
                     viewHolder2.restaurantListDividerTitle.setText(((restaurantInfo.getTime()/10 + 1) * 10) + "분이내");
                     //Picasso.with(context).load(restaurant.getImageUrl()).into(holder.mapRestaurantImageView);
                     viewHolder2.restaurantListName.setText((position + 1) +". "+restaurantInfo.getName());
-                    for(int i=0; i<foodTag.size()-1; i++)
-                        foodTagStr += foodTag.get(i) + " > ";
-                    foodTagStr += foodTag.get(foodTag.size()-1);
-                    viewHolder2.restaurantListFoodTag.setText(foodTagStr);
+                    viewHolder2.restaurantListFoodTag.setText(foodTag);
                     viewHolder2.restaurantListLikeNumber.setText(Integer.toString(restaurantInfo.getLikeNumber()));
                     viewHolder2.restaurantListReviewNumber.setText(Integer.toString(restaurantInfo.getReviewNumber()));
                     viewHolder2.restaurantListTime.setText(Integer.toString(restaurantInfo.getTime()));

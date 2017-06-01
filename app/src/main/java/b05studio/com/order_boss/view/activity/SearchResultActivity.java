@@ -33,19 +33,20 @@ public class SearchResultActivity extends AppCompatActivity {
 
     }
 
+    // TODO: 2017-06-01  여기작업 해야됨,
     public ArrayList<RestaurantInfo> getMatchingRestaurantInfo(String keyword) {
-        //get restaurant infos
-        ArrayList<RestaurantInfo> restaurantInfos = new ArrayList<>();
+       // //get restaurant infos
+       // ArrayList<RestaurantInfo> restaurantInfos = new ArrayList<>();
         ArrayList<RestaurantInfo> matchingInfos = new ArrayList<>();
-        for(int i=0; i<restaurantInfos.size(); i++) {
-            ArrayList<String> foodTag = restaurantInfos.get(i).getFoodTag();
-            for(int j=0; j<foodTag.size(); j++)
-                if(foodTag.get(j).indexOf(keyword) != -1) {
-                    matchingInfos.add((restaurantInfos.get(i)));
-                    break;
-                }
-        }
-
+       // for(int i=0; i<restaurantInfos.size(); i++) {
+       //     String foodTag = restaurantInfos.get(i).getFoodTag();
+       //     for(int j=0; j<foodTag.size(); j++)
+       //         if(foodTag.get(j).indexOf(keyword) != -1) {
+       //             matchingInfos.add((restaurantInfos.get(i)));
+       //             break;
+       //         }
+       // }
+//
         return matchingInfos;
     }
 

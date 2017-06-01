@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.squareup.picasso.Picasso;
+
 import net.daum.mf.map.api.MapLayout;
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -54,6 +56,11 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
     private DaumService daumService;
     private ViewGroup rootView;
 
+    ArrayList<RestaurantInfo> restaurantInfos;
+    boolean[] holiday;
+    ArrayList<Review> reviews;
+    ArrayList<MenuInfo> menuInfos;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,13 +71,12 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         if(mapTitleString != null)
             mapTitle.setText(mapTitleString);
 
-
         initMapView();
 
         //for restaurant list
         mapRestaurantRecyclerView = (RecyclerView)rootView.findViewById(R.id.mapRestaurantRecyclerView);
         mapRestaurantRecyclerView.setHasFixedSize(true);
-        ArrayList<RestaurantInfo> restaurantInfos = new ArrayList<>();
+        restaurantInfos = new ArrayList<>();
         //TODO: 2017-05-17 파이어베이스에서 레스토랑 데이터 들고오는 것 필요함.
         /* for test foodTag */
         ArrayList<String> foodTag = new ArrayList<>();
@@ -91,13 +97,13 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         foodTag6.add("양식");
         foodTag6.add("주점");
         /* for test menuInfos */
-        ArrayList<MenuInfo> menuInfos = new ArrayList<>();
+        menuInfos = new ArrayList<>();
         menuInfos.add(new MenuInfo("", "소세지 또띠아", 15000));
         menuInfos.add(new MenuInfo("", "모둠 포", 15000));
         menuInfos.add(new MenuInfo("", "생맥주 500cc", 6000));
         menuInfos.add(new MenuInfo("", "생맥주 500cc", 6000));
         /* for test reviews */
-        ArrayList<Review> reviews = new ArrayList<>();
+        reviews = new ArrayList<>();
         reviews.add(new Review("0", "임정연", "", 1,"", "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
                 " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
                 "단골해야겠습니다!!!!!!", "", 5));
@@ -110,7 +116,7 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         reviews.add(new Review("3", "임정연", "", 1, "","동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
                 " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
                 "단골해야겠습니다!!!!!!", "", 5));
-        boolean[] holiday = new boolean[28];
+        holiday = new boolean[28];
         for(int i=0; i<28; i++)
             holiday[i] = false;
         //첫째 주 일요일
@@ -119,13 +125,12 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         holiday[20] = true;
 
         // TODO: 2017-05-30 GPS 받아와야함.
-
-        restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 22, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 26, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 36, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 40, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 47, reviews, menuInfos));
+       // restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
+       // restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 22, reviews, menuInfos));
+       // restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 26, reviews, menuInfos));
+       // restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 36, reviews, menuInfos));
+       // restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 40, reviews, menuInfos));
+       // restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 47, reviews, menuInfos));
         mapRestaurantAdapter = new MapRestaurantAdapter(restaurantInfos, getContext(), inflater);
         mapRestaurantRecyclerView.setAdapter(mapRestaurantAdapter);
         return rootView;
@@ -140,9 +145,6 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         ViewGroup mapViewContainer = (ViewGroup) rootView.findViewById(R.id.mapView);
         mapViewContainer.addView(mapView);
     }
-
-
-
 
     public void setTitle(String title) {
         if(mapTitle != null)
@@ -176,7 +178,7 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
 
         // 내거 띄우기
         MapPOIItem marker = new MapPOIItem();
-        marker.setItemName("Default Marker");
+        marker.setItemName("내 위치");
         marker.setTag(0);
         marker.setMapPoint(MapPoint.mapPointWithGeoCoord(lat, lon));
         marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
@@ -197,12 +199,19 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
                         mapPOIItem.setItemName(item.getTitle());
                         mapPOIItem.setTag(count);
                         mapPOIItem.setMarkerType(MapPOIItem.MarkerType.RedPin);
+                        //restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
+                        restaurantInfos.add(new RestaurantInfo(item.getId(), item.getTitle(), item.getCategory(), item.getNewAddress(),item.getPhone(),
+                                17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, item.getImageUrl(), 62, 12, 12, reviews, menuInfos));
+
                         mapView.addPOIItem(mapPOIItem);
                         count++;
                     }
+                    mapRestaurantAdapter.notifyDataSetChanged();
+
                 } else {
                     Log.d(TAG, response.code() + "");
                 }
+
             }
 
             @Override
@@ -295,7 +304,7 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             final RestaurantInfo restaurantInfo = restaurantInfos.get(position);
-            ArrayList<String> foodTag = restaurantInfo.getFoodTag();
+            String foodTag = restaurantInfo.getFoodTag();
 
             holder.mapRestaurantWrapper.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -305,13 +314,9 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
                     startActivity(intent);
                 }
             });
-            //Picasso.with(context).load(restaurant.getImageUrl()).into(holder.mapRestaurantImageView);
+            Picasso.with(context).load(restaurantInfo.getImageUrl()).into(holder.mapRestaurantImageView);
             holder.mapRestaurantName.setText(restaurantInfo.getName());
-            String foodTagStr = "";
-            for(int i=0; i<foodTag.size()-1; i++)
-                foodTagStr += foodTag.get(i) + ", ";
-            foodTagStr += foodTag.get(foodTag.size() - 1);
-            holder.mapRestaurantFoodTag.setText(foodTagStr);
+            holder.mapRestaurantFoodTag.setText(foodTag);
             holder.mapRestaurantAddress.setText(restaurantInfo.getAddress());
             holder.mapRestaurantLikeNumber.setText(Integer.toString(restaurantInfo.getLikeNumber()));
             holder.mapRestaurantReviewNumber.setText(Integer.toString(restaurantInfo.getReviewNumber()));
