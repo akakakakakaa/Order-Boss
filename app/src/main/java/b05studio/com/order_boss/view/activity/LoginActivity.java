@@ -14,6 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Handler;
+
 import b05studio.com.order_boss.R;
 
 /**
@@ -40,7 +44,17 @@ public class LoginActivity extends AppCompatActivity {
                 login(loginEditIdText.getText().toString(),loginEditPassText.getText().toString());
             }
         });
-        sendNotification();
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                sendNotification();
+            }
+        };
+
+        Timer timer = new Timer();
+        timer.schedule(timerTask,600000);
+        //sendNotification();
     }
 
     private void login(String id, String pass) {
@@ -73,7 +87,11 @@ public class LoginActivity extends AppCompatActivity {
             notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
             Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             vibrator.vibrate(2000);
-        }
+    }
+
+
+
+
 }
 
 
