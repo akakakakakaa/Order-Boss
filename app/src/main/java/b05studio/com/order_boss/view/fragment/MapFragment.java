@@ -80,6 +80,10 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
 
         initMapView();
 
+        //for restaurant list
+        mapRestaurantRecyclerView = (RecyclerView)rootView.findViewById(R.id.mapRestaurantRecyclerView);
+        mapRestaurantRecyclerView.setHasFixedSize(true);
+        restaurantInfos = new ArrayList<>();
         mapRestaurantAdapter = new MapRestaurantAdapter(restaurantInfos, getContext(), inflater);
         mapRestaurantRecyclerView.setAdapter(mapRestaurantAdapter);
         return rootView;
@@ -149,8 +153,8 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
                         mapPOIItem.setTag(count);
                         mapPOIItem.setMarkerType(MapPOIItem.MarkerType.RedPin);
                         //restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
-                        restaurantInfos.add(new RestaurantInfo(item.getId(), item.getTitle(), item.getCategory(), item.getNewAddress(),item.getPhone(),
-                                17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, item.getImageUrl(), 62, 12, 12, reviews, menuInfos));
+                        restaurantInfos.add(new RestaurantInfo(item.getId(), item.getTitle(), item.getCategory(), item.getNewAddress(),item.getPhone(), Integer.parseInt(item.getDistance()),
+                                 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, item.getImageUrl(), 62, 12, 12, reviews, menuInfos));
 
                         mapView.addPOIItem(mapPOIItem);
                         count++;
