@@ -10,7 +10,7 @@ import java.util.Calendar;
 public class RestaurantInfo {
     private String id;
     private String name;
-    private ArrayList<String> foodTag;
+    private String foodTag;
     private String address;
     private String phoneNum;
     private int startHour;
@@ -37,7 +37,7 @@ public class RestaurantInfo {
         currentRestaurantInfo = restaurantInfo;
     }
 
-    public RestaurantInfo(String id, String name, ArrayList<String> foodTag, String address, String phoneNum, int startHour, int startMinute, int endHour, int endMinute, boolean[] holiday, String holidayString, String avgPrice, int distance, String imageUrl, int likeNumber, int reviewNumber, int time, ArrayList<Review> reviews, ArrayList<MenuInfo> menuInfos) {
+    public RestaurantInfo(String id, String name, String foodTag, String address, String phoneNum, int startHour, int startMinute, int endHour, int endMinute, boolean[] holiday, String holidayString, String avgPrice, int distance, String imageUrl, int likeNumber, int reviewNumber, int time, ArrayList<Review> reviews, ArrayList<MenuInfo> menuInfos) {
         this.id = id;
         this.name = name;
         this.foodTag = foodTag;
@@ -99,11 +99,11 @@ public class RestaurantInfo {
         this.name = name;
     }
 
-    public ArrayList<String> getFoodTag() {
+    public String getFoodTag() {
         return foodTag;
     }
 
-    public void setFoodTag(ArrayList<String> foodTag) {
+    public void setFoodTag(String foodTag) {
         this.foodTag = foodTag;
     }
 

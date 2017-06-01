@@ -44,10 +44,12 @@ public class SearchResultActivity extends AppCompatActivity {
 
     }
 
+    // TODO: 2017-06-01  여기작업 해야됨,
     public ArrayList<RestaurantInfo> getMatchingRestaurantInfo(String keyword) {
-        //get restaurant infos
-        ArrayList<RestaurantInfo> restaurantInfos = new ArrayList<>();
+       // //get restaurant infos
+       // ArrayList<RestaurantInfo> restaurantInfos = new ArrayList<>();
         ArrayList<RestaurantInfo> matchingInfos = new ArrayList<>();
+<<<<<<< HEAD
         for(int i=0; i<restaurantInfos.size(); i++) {
             ArrayList<String> foodTag = restaurantInfos.get(i).getFoodTag();
             for(int j=0; j<foodTag.size(); j++)
@@ -59,6 +61,17 @@ public class SearchResultActivity extends AppCompatActivity {
 
         if(matchingInfos.size() == 0)
             ((TextView)findViewById(R.id.searchResultNoResult)).setVisibility(View.VISIBLE);
+=======
+       // for(int i=0; i<restaurantInfos.size(); i++) {
+       //     String foodTag = restaurantInfos.get(i).getFoodTag();
+       //     for(int j=0; j<foodTag.size(); j++)
+       //         if(foodTag.get(j).indexOf(keyword) != -1) {
+       //             matchingInfos.add((restaurantInfos.get(i)));
+       //             break;
+       //         }
+       // }
+//
+>>>>>>> ad4e7ccdf7c6f4d454bc179bf5b5adc0ad29a430
         return matchingInfos;
     }
 
