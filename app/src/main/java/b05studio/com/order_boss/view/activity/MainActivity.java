@@ -10,6 +10,7 @@ import android.content.Intent;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationItem firstBottomItem = new BottomNavigationItem(R.drawable.icon_main_checked);
         Drawable inActiveIcon1 = getResources().getDrawable(R.drawable.icon_main_unchecked);
-        inActiveIcon1.setTint(Color.parseColor("#888888"));
+        setTint(inActiveIcon1, Color.parseColor("#888888"));
         firstBottomItem.setInactiveIcon(inActiveIcon1);
         //firstBottomItem.setInactiveIcon(getResources().getDrawable(R.drawable.icon_main_empty));
         //firstBottomItem.setInActiveColor(Color.parseColor("#888888"));
@@ -80,14 +81,15 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationItem secondBottomItem = new BottomNavigationItem(R.drawable.icon_order_list_checked);
         Drawable inActiveIcon2 = getResources().getDrawable(R.drawable.icon_order_list_unckecked);
-        inActiveIcon2.setTint(Color.parseColor("#888888"));
+        setTint(inActiveIcon2, Color.parseColor("#888888"));
         secondBottomItem.setInactiveIcon(inActiveIcon2);
        // secondBottomItem.setInActiveColor(Color.parseColor("#888888"));
 
         BottomNavigationItem thirdBottomItem = new BottomNavigationItem(R.drawable.icon_profile_checked);
         Drawable inActiveIcon3 = getResources().getDrawable(R.drawable.icon_profile_unchecked);
-        inActiveIcon3.setTint(Color.parseColor("#888888"));
+        setTint(inActiveIcon3, Color.parseColor("#888888"));
         thirdBottomItem.setInactiveIcon(inActiveIcon3);
+
        // thirdBottomItem.setInactiveIcon(getResources().getDrawable(R.drawable.icon_profile_unchecked));
        // thirdBottomItem.setInActiveColor(Color.parseColor("#888888"));
 
@@ -133,6 +135,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setTint(Drawable d, int color) {
+        Drawable wrappedDrawable = DrawableCompat.wrap(d);
+        DrawableCompat.setTint(wrappedDrawable, color);
     }
 
     public static void moveToMapFragment(FragmentManager fm, String title) {

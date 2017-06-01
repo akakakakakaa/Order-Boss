@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F0F0">
     <android.support.v7.widget.Toolbar
-        android:id="@+id/mapToolbar"
+        android:id="@+id/myReservationToolbar"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:background="#F8F8F8"
@@ -26,23 +26,11 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageButton
-                android:id="@+id/mapBackButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_back"
-                android:tint="#888888"
-                android:background="@null"
-                android:layout_marginLeft="19dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginStart="19dp" />
             <TextView
-                android:id="@+id/mapTitle"
+                android:id="@+id/myReservationTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="순번대장"
+                android:text="내 예약"
                 android:textSize="20sp"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
@@ -50,44 +38,38 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
-            <ImageButton
-                android:id="@+id/mapFilterButton"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginRight="16dp"
-                android:src="@drawable/icon_filter"
-                android:background="@null"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginTop="12dp"
                 android:background="#11000000"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mapTitle"
+                app:layout_constraintTop_toBottomOf="@+id/myReservationTitle"
                 app:layout_constraintRight_toRightOf="parent"/>
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.Toolbar>
-
-    <FrameLayout
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapToolbar"
-        app:layout_constraintRight_toRightOf="parent"/>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/mapRestaurantRecyclerView"
+    <TextView
+        android:id="@+id/myReservationNoResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:scrollbars="horizontal"
+        android:text="예약결과가 없습니다."
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/myReservationRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp"
+        android:paddingBottom="60dp"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </android.support.v7.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/myReservationToolbar"
+        app:layout_constraintRight_toRightOf="parent" />
 </android.support.constraint.ConstraintLayout>

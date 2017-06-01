@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
     <android.support.v7.widget.Toolbar
         android:id="@+id/searchToolbar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="#F8F8F8"
         android:theme="?attr/actionBarTheme"
@@ -51,6 +51,16 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="12dp"
+                android:background="#11000000"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchListTitle"
+                app:layout_constraintRight_toRightOf="parent"/>
+
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.Toolbar>
 
@@ -68,22 +78,29 @@
 
     <EditText
         android:id="@+id/searchEditText"
-        android:layout_width="270dp"
+        android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="14dp"
+        android:layout_marginLeft="30dp"
         android:textSize="14sp"
+        android:maxLines="1"
+        android:scrollHorizontally="true"
+        android:ellipsize="end"
+        android:inputType="text"
+        android:gravity="left|top"
         android:textColor="@android:color/black"
-        android:gravity="left|center_vertical"
         android:background="@null"
+        android:textCursorDrawable="@drawable/edittext_cursor_color"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchWrapper"
         app:layout_constraintBottom_toTopOf="@+id/searchWrapper"/>
+
     <ImageButton
         android:id="@+id/searchIcon"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
         android:src="@drawable/icon_search"
+        android:background="@null"
         android:tint="#808080"
         app:layout_constraintLeft_toRightOf="@+id/searchEditText"
         app:layout_constraintTop_toBottomOf="@+id/searchWrapper"
@@ -109,4 +126,4 @@
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchText"/>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

@@ -39,6 +39,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+
         loadSearchInfo();
         initSearchButton();
         setSearchEditText();
@@ -82,7 +83,7 @@ public class SearchActivity extends AppCompatActivity {
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (i == EditorInfo.IME_NULL && keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+                if (i == EditorInfo.IME_ACTION_NEXT) {
                     searchInfos.add(new SearchInfo(Calendar.getInstance(), textView.getText().toString()));
                     saveSearchInfo();
 
@@ -99,7 +100,7 @@ public class SearchActivity extends AppCompatActivity {
     public void saveSearchInfo() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-    /* sKey is an array */
+
         editor.putInt("keywordSize", searchInfos.size());
 
         Gson gson = new Gson();
@@ -115,7 +116,7 @@ public class SearchActivity extends AppCompatActivity {
         private ArrayList<SearchInfo> searchInfos;
         private Context context;
         private LayoutInflater inflater;
-        private int[] dateChooseMin = new int[3];
+        private int[] dateChooseMax = new int[3];
         private TextView[] dates = new TextView[3];
 
         public SearchAdapter(ArrayList<SearchInfo> searchInfos, Context context, LayoutInflater inflater) {
@@ -123,8 +124,8 @@ public class SearchActivity extends AppCompatActivity {
             this.context = context;
             this.inflater = inflater;
 
-            for(int i=0; i<dateChooseMin.length; i++)
-                dateChooseMin[i] = Integer.MAX_VALUE;
+            for(int i=0; i<dateChooseMax.length; i++)
+                dateChooseMax[i] = -1;
         }
 
         @Override
@@ -142,21 +143,21 @@ public class SearchActivity extends AppCompatActivity {
             long diff = System.currentTimeMillis() - calendar.getTimeInMillis();
 
             if(diff < 1000*60*10)
-                if(position < dateChooseMin[0]) {
+                if(position > dateChooseMax[0]) {
                     if(dates[0] != null)
                         dates[0].setText("");
                     holder.date.setText("방금");
                     dates[0] = holder.date;
                 }
             else if(diff < 1000*60*60*24)
-                if (position < dateChooseMin[1]) {
+                if (position > dateChooseMax[1]) {
                     if (dates[1] != null)
                         dates[1].setText("");
                     holder.date.setText("오늘");
                     dates[1] = holder.date;
                 }
             else if(diff >= 1000*60*60*24)
-                    if (position < dateChooseMin[2]) {
+                    if (position > dateChooseMax[3]) {
                         if (dates[2] != null)
                             dates[2].setText("");
                         holder.date.setText("어제");

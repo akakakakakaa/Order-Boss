@@ -1,15 +1,15 @@
 package b05studio.com.order_boss.view.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
@@ -17,13 +17,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import b05studio.com.order_boss.R;
 import b05studio.com.order_boss.model.MenuInfo;
@@ -108,12 +105,12 @@ public class RestaurantListFragment extends Fragment {
         //셋째 주 일요일
         holiday[20] = true;
 
-        restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 22, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 26, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 36, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 40, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 47, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1280, "1", 62, 12, 12, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1330, "1", 62, 12, 22, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1450, "1", 62, 12, 26, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1280, "1", 62, 12, 36, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1330, "1", 62, 12, 40, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1450, "1", 62, 12, 47, reviews, menuInfos));
 
         restaurantListAdapter = new RestaurantListAdapter(restaurantInfos, getContext(), inflater);
         restaurantListRecyclerView.setAdapter(restaurantListAdapter);
@@ -196,32 +193,11 @@ public class RestaurantListFragment extends Fragment {
         private ArrayList<RestaurantInfo> restaurantInfos;
         private Context context;
         private LayoutInflater inflater;
-        private int arrangeType;
-        private SharedPreferences pref;
-        private final Comparator<RestaurantInfo> comparator = new Comparator<RestaurantInfo>() {
-            @Override
-            public int compare(RestaurantInfo o1, RestaurantInfo o2) {
-                switch (arrangeType) {
-                    case 0: //by time
-                        return (o1.getTime() >= o2.getTime()) ? 1 : 0;
-                    case 1: //by distance
-                        return (o1.getDistance() >= o2.getDistance()) ? 1 : 0;
-                    case 2: //by popularity
-                        return (o1.getLikeNumber() >= o2.getLikeNumber()) ? 1 : 0;
-                    default:
-                        return 0;
-                }
-            }
-        };
 
         public RestaurantListAdapter(ArrayList<RestaurantInfo> restaurantInfos, Context context, LayoutInflater inflater) {
             this.restaurantInfos = restaurantInfos;
             this.context = context;
             this.inflater = inflater;
-
-            pref = context.getSharedPreferences("listFilter", Activity.MODE_PRIVATE);
-            arrangeType = pref.getInt("filter", 0);
-            Collections.sort(restaurantInfos, comparator);
         }
 
         public void setInfos(ArrayList<RestaurantInfo> restaurantInfos) {
@@ -234,75 +210,12 @@ public class RestaurantListFragment extends Fragment {
             });
         }
 
-        //0: card, 1: card with text divider
-        @Override
-        public int getItemViewType(int position) {
-            if(position == 0)
-                return 1;
-            else {
-                RestaurantInfo prev = restaurantInfos.get(position - 1);
-                RestaurantInfo next = restaurantInfos.get(position);
-
-                switch (arrangeType) {
-                    case 0:
-                        if (next.getTime()/10 - prev.getTime()/10 >= 1)
-                            return 1;
-                        else
-                            return 0;
-                    case 1:
-                        if (next.getDistance() - prev.getDistance() >= 10)
-                            return 1;
-                        else
-                            return 0;
-                    case 2:
-                        if (next.getLikeNumber() - prev.getLikeNumber() >= 10)
-                            return 1;
-                        else
-                            return 0;
-                    default:
-                            return 0;
-                }
-            }
-        }
-
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             Log.d(TAG, "onCreateViewHolder");
             View card = inflater.from(parent.getContext()).inflate(R.layout.cardview_restaurant_list, parent, false);
-
-            switch (viewType) {
-                case 0:
-                    RecyclerView.ViewHolder holder = new RestaurantListAdapter.ViewHolder(card);
-                    return holder;
-                default:
-                    View divider = inflater.from(parent.getContext()).inflate(R.layout.cardview_restaurant_list_divider, parent, false);
-                    ConstraintLayout dividerLayout = (ConstraintLayout)divider.findViewById(R.id.restaurantListDivider);
-                    ConstraintSet set= new ConstraintSet();
-                    set.clone(dividerLayout);
-                    dividerLayout.addView(card);
-
-                    ConstraintLayout cardLayout = (ConstraintLayout)card.findViewById(R.id.restaurantListCard);
-                    set.connect(cardLayout.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
-                    set.connect(cardLayout.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
-                    set.connect(cardLayout.getId(), ConstraintSet.TOP, R.id.restaurantListDividerTitle, ConstraintSet.BOTTOM, 0);
-                    set.setMargin(cardLayout.getId(), ConstraintSet.TOP, (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 9, getResources().getDisplayMetrics()));
-                    set.constrainWidth(cardLayout.getId(), 0);
-                    set.constrainHeight(cardLayout.getId(), (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 157, getResources().getDisplayMetrics()));
-                    set.applyTo(dividerLayout);
-                    /*
-                    //생각대로 안돌아간다.
-                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) cardLayout.getLayoutParams();
-                    params.width = 0;
-                    params.startToStart = R.id.restaurantListDivider;
-                    params.endToEnd = R.id.restaurantListDivider;
-                    params.leftToLeft = R.id.restaurantListDivider;
-                    params.topToBottom = R.id.restaurantListDividerTitle;
-                    params.rightToRight = R.id.restaurantListDivider;
-                    cardLayout.setLayoutParams(params);
-                    */
-                    RecyclerView.ViewHolder holder2 = new RestaurantListAdapter.ViewHolder2(divider);
-                    return holder2;
-            }
+            RecyclerView.ViewHolder holder = new RestaurantListAdapter.ViewHolder(card);
+            return holder;
         }
 
         @Override
@@ -312,51 +225,32 @@ public class RestaurantListFragment extends Fragment {
             ArrayList<String> foodTag = restaurantInfo.getFoodTag();
 
             String foodTagStr = "";
-            switch (holder.getItemViewType()) {
-                case 0:
-                    ViewHolder viewHolder = (ViewHolder)holder;
-                    viewHolder.restaurantListCard.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            RestaurantInfo.setCurrentRestaurantInfo(restaurantInfo);
-                            Intent intent = new Intent(getActivity(), RestaurantActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-                    //Picasso.with(context).load(restaurant.getImageUrl()).into(holder.mapRestaurantImageView);
-                    viewHolder.restaurantListName.setText((position + 1)+". "+restaurantInfo.getName());
-                    for(int i=0; i<foodTag.size()-1; i++)
-                        foodTagStr += foodTag.get(i) + " > ";
-                    foodTagStr += foodTag.get(foodTag.size()-1);
-                    viewHolder.restaurantListFoodTag.setText(foodTagStr);
-                    viewHolder.restaurantListLikeNumber.setText(Integer.toString(restaurantInfo.getLikeNumber()));
-                    viewHolder.restaurantListReviewNumber.setText(Integer.toString(restaurantInfo.getReviewNumber()));
-                    viewHolder.restaurantListTime.setText(Integer.toString(restaurantInfo.getTime()));
-                    viewHolder.restaurantListDistance.setText(Integer.toString(restaurantInfo.getDistance()));
-                    break;
-                case 1:
-                    ViewHolder2 viewHolder2 = (ViewHolder2)holder;
-                    viewHolder2.restaurantListCard.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            RestaurantInfo.setCurrentRestaurantInfo(restaurantInfo);
-                            Intent intent = new Intent(getActivity(), RestaurantActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-                    viewHolder2.restaurantListDividerTitle.setText(((restaurantInfo.getTime()/10 + 1) * 10) + "분이내");
-                    //Picasso.with(context).load(restaurant.getImageUrl()).into(holder.mapRestaurantImageView);
-                    viewHolder2.restaurantListName.setText((position + 1) +". "+restaurantInfo.getName());
-                    for(int i=0; i<foodTag.size()-1; i++)
-                        foodTagStr += foodTag.get(i) + " > ";
-                    foodTagStr += foodTag.get(foodTag.size()-1);
-                    viewHolder2.restaurantListFoodTag.setText(foodTagStr);
-                    viewHolder2.restaurantListLikeNumber.setText(Integer.toString(restaurantInfo.getLikeNumber()));
-                    viewHolder2.restaurantListReviewNumber.setText(Integer.toString(restaurantInfo.getReviewNumber()));
-                    viewHolder2.restaurantListTime.setText(Integer.toString(restaurantInfo.getTime()));
-                    viewHolder2.restaurantListDistance.setText(Integer.toString(restaurantInfo.getDistance()));
-                    break;
-            }
+            ViewHolder viewHolder = (ViewHolder)holder;
+            viewHolder.restaurantListCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    RestaurantInfo.setCurrentRestaurantInfo(restaurantInfo);
+                    Intent intent = new Intent(getActivity(), RestaurantActivity.class);
+                    startActivity(intent);
+                }
+            });
+            //Picasso.with(context).load(restaurant.getImageUrl()).into(holder.mapRestaurantImageView);
+            RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(getResources(), BitmapFactory.decodeResource(context.getResources(), R.drawable.restaurant_list_test_image2));
+            dr.setCornerRadius(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()));
+            viewHolder.restaurantListImageView.setImageDrawable(dr);
+            viewHolder.restaurantListName.setText((position + 1)+". "+restaurantInfo.getName());
+            for(int i=0; i<foodTag.size()-1; i++)
+                foodTagStr += foodTag.get(i) + " > ";
+            foodTagStr += foodTag.get(foodTag.size()-1);
+            viewHolder.restaurantListFoodTag.setText(foodTagStr);
+            viewHolder.restaurantListLikeNumber.setText(Integer.toString(restaurantInfo.getLikeNumber()));
+            viewHolder.restaurantListReviewNumber.setText(Integer.toString(restaurantInfo.getReviewNumber()));
+            String distance;
+            if(restaurantInfo.getDistance() >= 1000)
+                distance = (restaurantInfo.getDistance() / 1000) + "." + (restaurantInfo.getDistance() % 1000)/10 + "km";
+            else
+                distance = restaurantInfo.getDistance() + "m";
+            viewHolder.restaurantListDistance.setText(distance);
         }
 
         @Override
@@ -371,7 +265,6 @@ public class RestaurantListFragment extends Fragment {
             public TextView restaurantListFoodTag;
             public TextView restaurantListLikeNumber;
             public TextView restaurantListReviewNumber;
-            public TextView restaurantListTime;
             public TextView restaurantListDistance;
 
             public ViewHolder(View view) {
@@ -382,32 +275,6 @@ public class RestaurantListFragment extends Fragment {
                 restaurantListFoodTag = (TextView)view.findViewById(R.id.restaurantListFoodTag);
                 restaurantListLikeNumber = (TextView)view.findViewById(R.id.restaurantListLikeNumber);
                 restaurantListReviewNumber = (TextView)view.findViewById(R.id.restaurantListReviewNumber);
-                restaurantListTime = (TextView)view.findViewById(R.id.restaurantListTime);
-                restaurantListDistance = (TextView)view.findViewById(R.id.restaurantListDistance);
-            }
-        }
-
-        public class ViewHolder2 extends RecyclerView.ViewHolder {
-            public TextView restaurantListDividerTitle;
-            public ConstraintLayout restaurantListCard;
-            public ImageView restaurantListImageView;
-            public TextView restaurantListName;
-            public TextView restaurantListFoodTag;
-            public TextView restaurantListLikeNumber;
-            public TextView restaurantListReviewNumber;
-            public TextView restaurantListTime;
-            public TextView restaurantListDistance;
-
-            public ViewHolder2(View view) {
-                super(view);
-                restaurantListDividerTitle = (TextView)view.findViewById(R.id.restaurantListDividerTitle);
-                restaurantListCard = (ConstraintLayout)view.findViewById(R.id.restaurantListCard);
-                restaurantListImageView = (ImageView)view.findViewById(R.id.restaurantListImageView);
-                restaurantListName = (TextView)view.findViewById(R.id.restaurantListName);
-                restaurantListFoodTag = (TextView)view.findViewById(R.id.restaurantListFoodTag);
-                restaurantListLikeNumber = (TextView)view.findViewById(R.id.restaurantListLikeNumber);
-                restaurantListReviewNumber = (TextView)view.findViewById(R.id.restaurantListReviewNumber);
-                restaurantListTime = (TextView)view.findViewById(R.id.restaurantListTime);
                 restaurantListDistance = (TextView)view.findViewById(R.id.restaurantListDistance);
             }
         }

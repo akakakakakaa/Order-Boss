@@ -2,12 +2,17 @@ package b05studio.com.order_boss.view.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,12 +141,12 @@ public class MapFragment extends Fragment {
                                });
 
 
-        restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 22, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 26, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 36, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 40, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 47, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1280, "1", 62, 12, 12, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1330, "1", 62, 12, 22, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1450, "1", 62, 12, 26, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1280, "1", 62, 12, 36, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1330, "1", 62, 12, 40, reviews, menuInfos));
+        restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1450, "1", 62, 12, 47, reviews, menuInfos));
         mapRestaurantAdapter = new MapRestaurantAdapter(restaurantInfos, getContext(), inflater);
         mapRestaurantRecyclerView.setAdapter(mapRestaurantAdapter);
         return rootView;
@@ -203,17 +208,24 @@ public class MapFragment extends Fragment {
                 }
             });
             //Picasso.with(context).load(restaurant.getImageUrl()).into(holder.mapRestaurantImageView);
-            holder.mapRestaurantName.setText(restaurantInfo.getName());
+            RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(getResources(), BitmapFactory.decodeResource(context.getResources(), R.drawable.restaurant_info_test_image1));
+            dr.setCornerRadius(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
+            holder.mapRestaurantImageView.setImageDrawable(dr);
+            holder.mapRestaurantName.setText((position+1) + ". " + restaurantInfo.getName());
             String foodTagStr = "";
             for(int i=0; i<foodTag.size()-1; i++)
-                foodTagStr += foodTag.get(i) + ", ";
+                foodTagStr += foodTag.get(i) + " > ";
             foodTagStr += foodTag.get(foodTag.size() - 1);
             holder.mapRestaurantFoodTag.setText(foodTagStr);
             holder.mapRestaurantAddress.setText(restaurantInfo.getAddress());
             holder.mapRestaurantLikeNumber.setText(Integer.toString(restaurantInfo.getLikeNumber()));
             holder.mapRestaurantReviewNumber.setText(Integer.toString(restaurantInfo.getReviewNumber()));
-            holder.mapRestaurantTime.setText(Integer.toString(restaurantInfo.getTime()));
-            holder.mapRestaurantDistance.setText(Integer.toString(restaurantInfo.getDistance()));
+            String distance;
+            if(restaurantInfo.getDistance() >= 1000)
+                distance = (restaurantInfo.getDistance() / 1000) + "." + (restaurantInfo.getDistance() % 1000)/10 + "km";
+            else
+                distance = restaurantInfo.getDistance() + "m";
+            holder.mapRestaurantDistance.setText(distance);
         }
 
         @Override
@@ -229,7 +241,6 @@ public class MapFragment extends Fragment {
             public TextView mapRestaurantAddress;
             public TextView mapRestaurantLikeNumber;
             public TextView mapRestaurantReviewNumber;
-            public TextView mapRestaurantTime;
             public TextView mapRestaurantDistance;
 
             public ViewHolder(View view) {
@@ -241,7 +252,6 @@ public class MapFragment extends Fragment {
                 mapRestaurantAddress = (TextView)view.findViewById(R.id.mapRestaurantAddress);
                 mapRestaurantLikeNumber = (TextView)view.findViewById(R.id.mapRestaurantLikeNumber);
                 mapRestaurantReviewNumber = (TextView)view.findViewById(R.id.mapRestaurantReviewNumber);
-                mapRestaurantTime = (TextView)view.findViewById(R.id.mapRestaurantTime);
                 mapRestaurantDistance = (TextView)view.findViewById(R.id.mapRestaurantDistance);
             }
         }

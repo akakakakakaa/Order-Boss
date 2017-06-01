@@ -24,6 +24,7 @@
         <activity android:name=".view.activity.SettingActivity" />
         <activity android:name=".view.activity.MyRecordActivity" />
         <activity android:name=".view.activity.SearchActivity" />
+        <activity android:name=".view.activity.SearchResultActivity" />
     </application>
 
 </manifest>

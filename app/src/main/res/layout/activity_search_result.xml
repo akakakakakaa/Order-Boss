@@ -6,7 +6,7 @@
     android:background="#FFFFFF">
     <android.support.v7.widget.Toolbar
         android:id="@+id/searchResultToolbar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="#F8F8F8"
         android:theme="?attr/actionBarTheme"
@@ -40,7 +40,7 @@
                 android:layout_marginStart="19dp" />
 
             <TextView
-                android:id="@+id/searchResultListTitle"
+                android:id="@+id/searchResultTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="검색 결과"
@@ -51,19 +51,31 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="12dp"
+                android:background="#11000000"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchResultTitle"
+                app:layout_constraintRight_toRightOf="parent"/>
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.Toolbar>
+
     <TextView
-        android:id="@+id/searchResultText"
+        android:id="@+id/searchResultNoResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:text="검색 결과"
+        android:text="검색 결과가 없습니다."
         android:textSize="20sp"
         android:textColor="@android:color/black"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchResultToolbar"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/searchResultRecyclerView"
         android:layout_width="match_parent"
@@ -73,6 +85,6 @@
         android:layout_marginRight="8dp"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchResultText"
+        app:layout_constraintTop_toBottomOf="@+id/searchResultToolbar"
         app:layout_constraintRight_toRightOf="parent"/>
 </LinearLayout>

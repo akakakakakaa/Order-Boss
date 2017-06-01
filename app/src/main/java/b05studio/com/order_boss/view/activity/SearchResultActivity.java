@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +26,16 @@ public class SearchResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
+
+        TextView title = (TextView)findViewById(R.id.searchResultTitle);
+        title.setText("'" + getIntent().getStringExtra("keyword") + "' 검색 결과");
+        ImageButton backBtn = (ImageButton)findViewById(R.id.searchResultBackButton);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         RecyclerView searchResultRecyclerView = (RecyclerView)findViewById(R.id.searchResultRecyclerView);
         searchResultRecyclerView.setHasFixedSize(true);
@@ -46,6 +57,8 @@ public class SearchResultActivity extends AppCompatActivity {
                 }
         }
 
+        if(matchingInfos.size() == 0)
+            ((TextView)findViewById(R.id.searchResultNoResult)).setVisibility(View.VISIBLE);
         return matchingInfos;
     }
 
@@ -82,7 +95,6 @@ public class SearchResultActivity extends AppCompatActivity {
             public TextView searchResultFoodTag;
             public TextView searchResultLikeNumber;
             public TextView searchResultReviewNumber;
-            public TextView searchResultTime;
             public TextView searchResultDistance;
 
             public ViewHolder(View view) {
@@ -92,7 +104,6 @@ public class SearchResultActivity extends AppCompatActivity {
                 searchResultFoodTag = (TextView)view.findViewById(R.id.searchResultFoodTag);
                 searchResultLikeNumber = (TextView)view.findViewById(R.id.searchResultLikeNumber);
                 searchResultReviewNumber = (TextView)view.findViewById(R.id.searchResultReviewNumber);
-                searchResultTime = (TextView)view.findViewById(R.id.searchResultTime);
                 searchResultDistance = (TextView)view.findViewById(R.id.searchResultDistance);
             }
         }
