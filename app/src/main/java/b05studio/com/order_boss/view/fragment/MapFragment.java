@@ -2,12 +2,10 @@ package b05studio.com.order_boss.view.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-<<<<<<< HEAD
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-=======
+import android.graphics.drawable.Drawable;
 import android.location.Location;
->>>>>>> ad4e7ccdf7c6f4d454bc179bf5b5adc0ad29a430
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -26,6 +24,7 @@ import android.widget.TextView;
 
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import net.daum.mf.map.api.MapLayout;
 import net.daum.mf.map.api.MapPOIItem;
@@ -81,95 +80,6 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
 
         initMapView();
 
-        //for restaurant list
-        mapRestaurantRecyclerView = (RecyclerView)rootView.findViewById(R.id.mapRestaurantRecyclerView);
-        mapRestaurantRecyclerView.setHasFixedSize(true);
-        restaurantInfos = new ArrayList<>();
-        //TODO: 2017-05-17 파이어베이스에서 레스토랑 데이터 들고오는 것 필요함.
-        /* for test foodTag */
-        ArrayList<String> foodTag = new ArrayList<>();
-        foodTag.add("일식");
-        foodTag.add("라멘");
-        ArrayList<String> foodTag2 = new ArrayList<>();
-        foodTag2.add("일식");
-        foodTag2.add("돈카츠");
-        ArrayList<String> foodTag3 = new ArrayList<>();
-        foodTag3.add("양식");
-        foodTag3.add("주점");
-        ArrayList<String> foodTag4 = new ArrayList<>();
-        foodTag4.add("한식");
-        foodTag4.add("분식");
-        ArrayList<String> foodTag5 = new ArrayList<>();
-        foodTag5.add("일식");
-        ArrayList<String> foodTag6 = new ArrayList<>();
-        foodTag6.add("양식");
-        foodTag6.add("주점");
-        /* for test menuInfos */
-        menuInfos = new ArrayList<>();
-        menuInfos.add(new MenuInfo("", "소세지 또띠아", 15000));
-        menuInfos.add(new MenuInfo("", "모둠 포", 15000));
-        menuInfos.add(new MenuInfo("", "생맥주 500cc", 6000));
-        menuInfos.add(new MenuInfo("", "생맥주 500cc", 6000));
-        /* for test reviews */
-        reviews = new ArrayList<>();
-        reviews.add(new Review("0", "임정연", "", 1,"", "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
-                " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
-                "단골해야겠습니다!!!!!!", "", 5));
-        reviews.add(new Review("1", "임정연", "", 1, "","동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
-                " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
-                "단골해야겠습니다!!!!!!", "", 5));
-        reviews.add(new Review("2", "임정연", "", 1, "","동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
-                " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
-                "단골해야겠습니다!!!!!!", "", 5));
-        reviews.add(new Review("3", "임정연", "", 1, "","동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
-                " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
-                "단골해야겠습니다!!!!!!", "", 5));
-        holiday = new boolean[28];
-        for(int i=0; i<28; i++)
-            holiday[i] = false;
-        //첫째 주 일요일
-        holiday[6] = true;
-        //셋째 주 일요일
-        holiday[20] = true;
-
-<<<<<<< HEAD
-        // TODO: 2017-05-30 GPS 받아와야함. 
-
-        daumService = DaumServiceGenerator.createService(DaumService.class);
-        Call<DaumLocalInfo> daumLocalInfos = daumService.listKeywordRestaurant(getString(R.string.daum_map_api_key),"한식");
-        daumLocalInfos.enqueue(new Callback<DaumLocalInfo>() {
-                                   @Override
-                                   public void onResponse(Call<DaumLocalInfo> call, Response<DaumLocalInfo> response) {
-                                       if(response.isSuccessful()) {
-                                           // TODO: 2017-05-30 만수야 여기 정보다 너어놨다. 
-                                            Log.d(TAG, response.body().getChannel().getItem().toString());
-                                       } else {
-                                           Log.d(TAG, response.code() + "");
-                                       }
-                                   }
-
-                                   @Override
-                                   public void onFailure(Call<DaumLocalInfo> call, Throwable t) {
-                                       Log.d(TAG,call.toString());
-                                   }
-                               });
-
-
-        restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1280, "1", 62, 12, 12, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1330, "1", 62, 12, 22, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1450, "1", 62, 12, 26, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1280, "1", 62, 12, 36, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1330, "1", 62, 12, 40, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1450, "1", 62, 12, 47, reviews, menuInfos));
-=======
-        // TODO: 2017-05-30 GPS 받아와야함.
-       // restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
-       // restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 22, reviews, menuInfos));
-       // restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 26, reviews, menuInfos));
-       // restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 36, reviews, menuInfos));
-       // restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 40, reviews, menuInfos));
-       // restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 47, reviews, menuInfos));
->>>>>>> ad4e7ccdf7c6f4d454bc179bf5b5adc0ad29a430
         mapRestaurantAdapter = new MapRestaurantAdapter(restaurantInfos, getContext(), inflater);
         mapRestaurantRecyclerView.setAdapter(mapRestaurantAdapter);
         return rootView;
@@ -341,7 +251,7 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(final ViewHolder holder, int position) {
             final RestaurantInfo restaurantInfo = restaurantInfos.get(position);
             String foodTag = restaurantInfo.getFoodTag();
 
@@ -353,22 +263,28 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
                     startActivity(intent);
                 }
             });
-<<<<<<< HEAD
             //Picasso.with(context).load(restaurant.getImageUrl()).into(holder.mapRestaurantImageView);
-            RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(getResources(), BitmapFactory.decodeResource(context.getResources(), R.drawable.restaurant_info_test_image1));
-            dr.setCornerRadius(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
-            holder.mapRestaurantImageView.setImageDrawable(dr);
-            holder.mapRestaurantName.setText((position+1) + ". " + restaurantInfo.getName());
-            String foodTagStr = "";
-            for(int i=0; i<foodTag.size()-1; i++)
-                foodTagStr += foodTag.get(i) + " > ";
-            foodTagStr += foodTag.get(foodTag.size() - 1);
-            holder.mapRestaurantFoodTag.setText(foodTagStr);
-=======
-            Picasso.with(context).load(restaurantInfo.getImageUrl()).into(holder.mapRestaurantImageView);
+            Picasso.with(context).load(restaurantInfo.getImageUrl())
+                    .into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+                            dr.setCornerRadius(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
+                            holder.mapRestaurantImageView.setImageDrawable(dr);
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) {
+
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                        }
+                    });
             holder.mapRestaurantName.setText(restaurantInfo.getName());
             holder.mapRestaurantFoodTag.setText(foodTag);
->>>>>>> ad4e7ccdf7c6f4d454bc179bf5b5adc0ad29a430
             holder.mapRestaurantAddress.setText(restaurantInfo.getAddress());
             holder.mapRestaurantLikeNumber.setText(Integer.toString(restaurantInfo.getLikeNumber()));
             holder.mapRestaurantReviewNumber.setText(Integer.toString(restaurantInfo.getReviewNumber()));

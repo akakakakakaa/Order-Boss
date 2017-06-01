@@ -40,9 +40,6 @@ public class MyReservationFragment extends Fragment {
         myReservationRecyclerView.setHasFixedSize(true);
         ArrayList<ReservationInfo> reservationInfos = User.getCurrentUser().getReservationInfos();
         //TODO:2017.06.01 ReservationInfo 가져오는것 필요함
-        ArrayList<String> foodTag = new ArrayList<>();
-        foodTag.add("일식");
-        foodTag.add("라멘");
         ArrayList<MenuInfo> menuInfos = new ArrayList<>();
         menuInfos.add(new MenuInfo("", "소세지 또띠아", 15000));
         menuInfos.add(new MenuInfo("", "모둠 포", 15000));
@@ -61,7 +58,7 @@ public class MyReservationFragment extends Fragment {
         //셋째 주 일요일
         holiday[20] = true;
 
-        ReservationInfo reservationInfo = new ReservationInfo(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1280, "1", 62, 12, 12, new ArrayList<Review>(), menuInfos), orderInfos, 25, Calendar.getInstance());
+        ReservationInfo reservationInfo = new ReservationInfo(new RestaurantInfo("1", "멘무샤", "일식 > 라멘", "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1280, "1", 62, 12, 12, new ArrayList<Review>(), menuInfos), orderInfos, 25, Calendar.getInstance());
         reservationInfos.add(reservationInfo);
         if(reservationInfos.size() == 0)
             rootView.findViewById(R.id.myReservationNoResult).setVisibility(View.VISIBLE);
@@ -101,12 +98,7 @@ public class MyReservationFragment extends Fragment {
             holder.myReservationMenuImage.setImageResource(R.drawable.restaurant_info_test_image1);
             holder.myReservationRestaurantName.setText(reservationInfo.getRestaurantInfo().getName());
 
-            ArrayList<String> foodTag = reservationInfo.getRestaurantInfo().getFoodTag();
-            String foodTagStr = "";
-            for(int i=0; i<foodTag.size()-1; i++)
-                foodTagStr += foodTag.get(i) + " > ";
-            foodTagStr += foodTag.get(foodTag.size()-1);
-            holder.myReservationFoodTag.setText(foodTagStr);
+            holder.myReservationFoodTag.setText(reservationInfo.getRestaurantInfo().getFoodTag());
             String distance;
             if(reservationInfo.getRestaurantInfo().getDistance() >= 1000)
                 distance = (reservationInfo.getRestaurantInfo().getDistance() / 1000) + "." + (reservationInfo.getRestaurantInfo().getDistance() % 1000)/10 + "km";

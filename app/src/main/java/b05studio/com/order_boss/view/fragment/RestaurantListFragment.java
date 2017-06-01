@@ -59,71 +59,6 @@ public class RestaurantListFragment extends Fragment {
         restaurantListRecyclerView.scrollToPosition(0);
 
         restaurantInfos = new ArrayList<>();
-        //TODO: 2017-05-17 파이어베이스에서 레스토랑 데이터 들고오는 것 필요함.
-        ArrayList<RestaurantInfo> restaurantInfos = new ArrayList<>();
-        //TODO: 2017-05-17 파이어베이스에서 레스토랑 데이터 들고오는 것 필요함.
-    /* for test foodTag */
-        ArrayList<String> foodTag = new ArrayList<>();
-        foodTag.add("일식");
-        foodTag.add("라멘");
-        ArrayList<String> foodTag2 = new ArrayList<>();
-        foodTag2.add("일식");
-        foodTag2.add("돈카츠");
-        ArrayList<String> foodTag3 = new ArrayList<>();
-        foodTag3.add("양식");
-        foodTag3.add("주점");
-        ArrayList<String> foodTag4 = new ArrayList<>();
-        foodTag4.add("한식");
-        foodTag4.add("분식");
-        ArrayList<String> foodTag5 = new ArrayList<>();
-        foodTag5.add("일식");
-        ArrayList<String> foodTag6 = new ArrayList<>();
-        foodTag6.add("양식");
-        foodTag6.add("주점");
-    /* for test menuInfos */
-        ArrayList<MenuInfo> menuInfos = new ArrayList<>();
-        menuInfos.add(new MenuInfo("", "소세지 또띠아", 15000));
-        menuInfos.add(new MenuInfo("", "모둠 포", 15000));
-        menuInfos.add(new MenuInfo("", "생맥주 500cc", 6000));
-        menuInfos.add(new MenuInfo("", "생맥주 500cc", 6000));
-    /* for test reviews */
-        ArrayList<Review> reviews = new ArrayList<>();
-        reviews.add(new Review("0", "임정연", "", 1,"", "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
-                " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
-                "단골해야겠습니다!!!!!!", "", 5));
-        reviews.add(new Review("1", "임정연", "", 1,"", "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
-                " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
-                "단골해야겠습니다!!!!!!", "", 5));
-        reviews.add(new Review("2", "임정연", "", 1, "","동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
-                " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
-                "단골해야겠습니다!!!!!!", "", 5));
-        reviews.add(new Review("3", "임정연", "", 1, "","동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
-                " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
-                "단골해야겠습니다!!!!!!", "", 5));
-        boolean[] holiday = new boolean[28];
-        for(int i=0; i<28; i++)
-            holiday[i] = false;
-        //첫째 주 일요일
-        holiday[6] = true;
-        //셋째 주 일요일
-        holiday[20] = true;
-
-<<<<<<< HEAD
-        restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1280, "1", 62, 12, 12, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1330, "1", 62, 12, 22, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1450, "1", 62, 12, 26, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1280, "1", 62, 12, 36, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1330, "1", 62, 12, 40, reviews, menuInfos));
-        restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1450, "1", 62, 12, 47, reviews, menuInfos));
-=======
-        //restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
-        //restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 22, reviews, menuInfos));
-        //restaurantInfos.add(new RestaurantInfo("3", "빈티지 컨테이너", foodTag3, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 26, reviews, menuInfos));
-        //restaurantInfos.add(new RestaurantInfo("4", "스쿨푸드", foodTag4, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 36, reviews, menuInfos));
-        //restaurantInfos.add(new RestaurantInfo("5", "사보텐", foodTag5, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 40, reviews, menuInfos));
-        //restaurantInfos.add(new RestaurantInfo("6", "빈티지 컨테이너", foodTag6, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 145, "1", 62, 12, 47, reviews, menuInfos));
->>>>>>> ad4e7ccdf7c6f4d454bc179bf5b5adc0ad29a430
-
         restaurantListAdapter = new RestaurantListAdapter(restaurantInfos, getContext(), inflater);
         restaurantListRecyclerView.setAdapter(restaurantListAdapter);
 
@@ -226,56 +161,15 @@ public class RestaurantListFragment extends Fragment {
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             Log.d(TAG, "onCreateViewHolder");
             View card = inflater.from(parent.getContext()).inflate(R.layout.cardview_restaurant_list, parent, false);
-<<<<<<< HEAD
             RecyclerView.ViewHolder holder = new RestaurantListAdapter.ViewHolder(card);
             return holder;
-=======
-
-            switch (viewType) {
-                case 0:
-                    RecyclerView.ViewHolder holder = new RestaurantListAdapter.ViewHolder(card);
-                    return holder;
-                default:
-                    View divider = inflater.from(parent.getContext()).inflate(R.layout.cardview_restaurant_list_divider, parent, false);
-                    ConstraintLayout dividerLayout = (ConstraintLayout)divider.findViewById(R.id.restaurantListDivider);
-                    ConstraintSet set= new ConstraintSet();
-                    set.clone(dividerLayout);
-                    dividerLayout.addView(card);
-
-                    ConstraintLayout cardLayout = (ConstraintLayout)card.findViewById(R.id.restaurantListCard);
-                    set.connect(cardLayout.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT, 0);
-                    set.connect(cardLayout.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, 0);
-                    set.connect(cardLayout.getId(), ConstraintSet.TOP, R.id.restaurantListDividerTitle, ConstraintSet.BOTTOM, 0);
-                    set.setMargin(cardLayout.getId(), ConstraintSet.TOP, (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 9, getResources().getDisplayMetrics()));
-                    set.constrainWidth(cardLayout.getId(), 0);
-                    set.constrainHeight(cardLayout.getId(), (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 157, getResources().getDisplayMetrics()));
-                    set.applyTo(dividerLayout);
-                    /*
-                    //생각대로 안돌아간다.
-                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) cardLayout.getLayoutParams();
-                    params.width = 0;
-                    params.startToStart = R.id.restaurantListDivider;
-
-                    params.endToEnd = R.id.restaurantListDivider;
-                    params.leftToLeft = R.id.restaurantListDivider;
-                    params.topToBottom = R.id.restaurantListDividerTitle;
-                    params.rightToRight = R.id.restaurantListDivider;
-                    cardLayout.setLayoutParams(params);
-                    */
-                    RecyclerView.ViewHolder holder2 = new RestaurantListAdapter.ViewHolder2(divider);
-                    return holder2;
-            }
->>>>>>> ad4e7ccdf7c6f4d454bc179bf5b5adc0ad29a430
         }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             Log.d(TAG, "onBindViewHolder");
             final RestaurantInfo restaurantInfo = restaurantInfos.get(position);
-<<<<<<< HEAD
-            ArrayList<String> foodTag = restaurantInfo.getFoodTag();
 
-            String foodTagStr = "";
             ViewHolder viewHolder = (ViewHolder)holder;
             viewHolder.restaurantListCard.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -290,10 +184,7 @@ public class RestaurantListFragment extends Fragment {
             dr.setCornerRadius(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()));
             viewHolder.restaurantListImageView.setImageDrawable(dr);
             viewHolder.restaurantListName.setText((position + 1)+". "+restaurantInfo.getName());
-            for(int i=0; i<foodTag.size()-1; i++)
-                foodTagStr += foodTag.get(i) + " > ";
-            foodTagStr += foodTag.get(foodTag.size()-1);
-            viewHolder.restaurantListFoodTag.setText(foodTagStr);
+            viewHolder.restaurantListFoodTag.setText(restaurantInfo.getFoodTag());
             viewHolder.restaurantListLikeNumber.setText(Integer.toString(restaurantInfo.getLikeNumber()));
             viewHolder.restaurantListReviewNumber.setText(Integer.toString(restaurantInfo.getReviewNumber()));
             String distance;
@@ -302,48 +193,6 @@ public class RestaurantListFragment extends Fragment {
             else
                 distance = restaurantInfo.getDistance() + "m";
             viewHolder.restaurantListDistance.setText(distance);
-=======
-            String foodTag = restaurantInfo.getFoodTag();
-            switch (holder.getItemViewType()) {
-                case 0:
-                    ViewHolder viewHolder = (ViewHolder)holder;
-                    viewHolder.restaurantListCard.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            RestaurantInfo.setCurrentRestaurantInfo(restaurantInfo);
-                            Intent intent = new Intent(getActivity(), RestaurantActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-                    Picasso.with(context).load(restaurantInfo.getImageUrl()).into(((ViewHolder) holder).restaurantListImageView);
-                    viewHolder.restaurantListName.setText((position + 1)+". "+restaurantInfo.getName());
-                    viewHolder.restaurantListFoodTag.setText(foodTag);
-                    viewHolder.restaurantListLikeNumber.setText(Integer.toString(restaurantInfo.getLikeNumber()));
-                    viewHolder.restaurantListReviewNumber.setText(Integer.toString(restaurantInfo.getReviewNumber()));
-                    viewHolder.restaurantListTime.setText(Integer.toString(restaurantInfo.getTime()));
-                    viewHolder.restaurantListDistance.setText(Integer.toString(restaurantInfo.getDistance()));
-                    break;
-                case 1:
-                    ViewHolder2 viewHolder2 = (ViewHolder2)holder;
-                    viewHolder2.restaurantListCard.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            RestaurantInfo.setCurrentRestaurantInfo(restaurantInfo);
-                            Intent intent = new Intent(getActivity(), RestaurantActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-                    viewHolder2.restaurantListDividerTitle.setText(((restaurantInfo.getTime()/10 + 1) * 10) + "분이내");
-                    //Picasso.with(context).load(restaurant.getImageUrl()).into(holder.mapRestaurantImageView);
-                    viewHolder2.restaurantListName.setText((position + 1) +". "+restaurantInfo.getName());
-                    viewHolder2.restaurantListFoodTag.setText(foodTag);
-                    viewHolder2.restaurantListLikeNumber.setText(Integer.toString(restaurantInfo.getLikeNumber()));
-                    viewHolder2.restaurantListReviewNumber.setText(Integer.toString(restaurantInfo.getReviewNumber()));
-                    viewHolder2.restaurantListTime.setText(Integer.toString(restaurantInfo.getTime()));
-                    viewHolder2.restaurantListDistance.setText(Integer.toString(restaurantInfo.getDistance()));
-                    break;
-            }
->>>>>>> ad4e7ccdf7c6f4d454bc179bf5b5adc0ad29a430
         }
 
         @Override

@@ -16,11 +16,8 @@ import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-<<<<<<< HEAD
 import android.support.v4.graphics.drawable.DrawableCompat;
-=======
 import android.support.v7.app.AlertDialog;
->>>>>>> ad4e7ccdf7c6f4d454bc179bf5b5adc0ad29a430
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
