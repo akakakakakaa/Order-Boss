@@ -15,8 +15,8 @@ public interface DaumService {
     @GET("local/v1/search/keyword.json")
     Call<DaumLocalInfo> listKeywordRestaurant(
              @Query("apikey") String apikey,
-             @Query("query") String query);
-       //      @Query("location") String location,
+             @Query("query") String query,
+             @Query("location") String location);
        //      @Query("radius") int radius
 
 

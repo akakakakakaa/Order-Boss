@@ -52,34 +52,20 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
     private TextView mapTitle;
     private String mapTitleString;
     private DaumService daumService;
-
-    Location myLocation;
-    private MapView mapView;
+    private ViewGroup rootView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_map, container, false);
+        rootView = (ViewGroup) inflater.inflate(R.layout.fragment_map, container, false);
         Log.d("dddddddd",LocationTracker.getCurLoc().getLatitude() + "");
         //myLocation =
         mapTitle = (TextView)rootView.findViewById(R.id.mapTitle);
         if(mapTitleString != null)
             mapTitle.setText(mapTitleString);
 
-        MapView mapView = new MapView(getActivity());
-        mapView.setDaumMapApiKey(getString(R.string.daum_map_api_key));
-        mapView.setMapViewEventListener(this);
-        mapView.setPOIItemEventListener(this);
-        ViewGroup mapViewContainer = (ViewGroup) rootView.findViewById(R.id.mapView);
-        mapViewContainer.addView(mapView);
 
-
-
-//
-       // Log.d("여기","init 완료");
-       // mapView.setMapCenterPoint(MapPoint.mapPointWithCONGCoord(LocationTracker.getCurLoc().getLatitude(), LocationTracker.getCurLoc().getLongitude()),true);
-
-
+        initMapView();
 
         //for restaurant list
         mapRestaurantRecyclerView = (RecyclerView)rootView.findViewById(R.id.mapRestaurantRecyclerView);
@@ -132,27 +118,7 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         //셋째 주 일요일
         holiday[20] = true;
 
-        // TODO: 2017-05-30 GPS 받아와야함. 
-
-        daumService = DaumServiceGenerator.createService(DaumService.class);
-        Call<DaumLocalInfo> daumLocalInfos = daumService.listKeywordRestaurant(getString(R.string.daum_map_api_key),"한식");
-        daumLocalInfos.enqueue(new Callback<DaumLocalInfo>() {
-                                   @Override
-                                   public void onResponse(Call<DaumLocalInfo> call, Response<DaumLocalInfo> response) {
-                                       if(response.isSuccessful()) {
-                                           // TODO: 2017-05-30 만수야 여기 정보다 너어놨다. 
-                                            Log.d(TAG, response.body().getChannel().getItem().toString());
-                                       } else {
-                                           Log.d(TAG, response.code() + "");
-                                       }
-                                   }
-
-                                   @Override
-                                   public void onFailure(Call<DaumLocalInfo> call, Throwable t) {
-                                       Log.d(TAG,call.toString());
-                                   }
-                               });
-
+        // TODO: 2017-05-30 GPS 받아와야함.
 
         restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
         restaurantInfos.add(new RestaurantInfo("2", "사보텐", foodTag2, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 133, "1", 62, 12, 22, reviews, menuInfos));
@@ -163,6 +129,16 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
         mapRestaurantAdapter = new MapRestaurantAdapter(restaurantInfos, getContext(), inflater);
         mapRestaurantRecyclerView.setAdapter(mapRestaurantAdapter);
         return rootView;
+    }
+
+
+    private void initMapView() {
+        MapView mapView = new MapView(getActivity());
+        mapView.setDaumMapApiKey(getString(R.string.daum_map_api_key));
+        mapView.setMapViewEventListener(this);
+        mapView.setPOIItemEventListener(this);
+        ViewGroup mapViewContainer = (ViewGroup) rootView.findViewById(R.id.mapView);
+        mapViewContainer.addView(mapView);
     }
 
 
@@ -193,19 +169,49 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
     }
 
     @Override
-    public void onMapViewInitialized(MapView mapView) {
-       //Log.d("들어오","냥");
-       //Log.d("위도 및 경도",LocationTracker.getCurLoc().getLatitude() + " " + LocationTracker.getCurLoc().getLongitude());
+    public void onMapViewInitialized(final MapView mapView) {
         Double lat = LocationTracker.getCurLoc().getLatitude();
         Double lon = LocationTracker.getCurLoc().getLongitude();
         mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(lat, lon) , true);
 
+        // 내거 띄우기
         MapPOIItem marker = new MapPOIItem();
         marker.setItemName("Default Marker");
         marker.setTag(0);
         marker.setMapPoint(MapPoint.mapPointWithGeoCoord(lat, lon));
         marker.setMarkerType(MapPOIItem.MarkerType.BluePin); // 기본으로 제공하는 BluePin 마커 모양.
         mapView.addPOIItem(marker);
+
+        // 내 주위 맛집 띄우기.
+        daumService = DaumServiceGenerator.createService(DaumService.class);
+        String daumLocationString = lat + "," + lon;
+        Call<DaumLocalInfo> daumLocalInfos = daumService.listKeywordRestaurant(getString(R.string.daum_map_api_key),"맛집",daumLocationString);
+        daumLocalInfos.enqueue(new Callback<DaumLocalInfo>() {
+            @Override
+            public void onResponse(Call<DaumLocalInfo> call, Response<DaumLocalInfo> response) {
+                if(response.isSuccessful()) {
+                    int count = 0;
+                    for (DaumLocalInfo.Item item : response.body().getChannel().getItem()) {
+                        MapPOIItem mapPOIItem = new MapPOIItem();
+                        mapPOIItem.setMapPoint(MapPoint.mapPointWithGeoCoord(Double.parseDouble(item.getLatitude()),Double.parseDouble(item.getLongitude())));
+                        mapPOIItem.setItemName(item.getTitle());
+                        mapPOIItem.setTag(count);
+                        mapPOIItem.setMarkerType(MapPOIItem.MarkerType.RedPin);
+                        mapView.addPOIItem(mapPOIItem);
+                        count++;
+                    }
+                } else {
+                    Log.d(TAG, response.code() + "");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DaumLocalInfo> call, Throwable t) {
+                Log.d(TAG,call.toString());
+            }
+        });
+
+
     }
 
     @Override
