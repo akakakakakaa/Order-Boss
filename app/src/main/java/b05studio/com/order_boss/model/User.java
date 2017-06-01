@@ -10,6 +10,7 @@ public class User {
     private String userId;
     private String userProfileUrl;
     private String userName;
+    private String userPhoneNum;
     private ArrayList<Review> myReviews;
     //파이어베이스에서 가져오는 정보가 아님. 나의 현재 장바구니 정보를 담는 객체
     private ArrayList<OrderInfo> currentOrderInfos = new ArrayList<>();
@@ -23,10 +24,11 @@ public class User {
         currentUser = user;
     }
 
-    public User(String userId, String userProfileUrl, String userName, ArrayList<Review> myReviews, ArrayList<ReservationInfo> reservationInfos) {
+    public User(String userId, String userProfileUrl, String userName, String userPhoneNum, ArrayList<Review> myReviews, ArrayList<ReservationInfo> reservationInfos) {
         this.userId = userId;
         this.userProfileUrl = userProfileUrl;
         this.userName = userName;
+        this.userPhoneNum = userPhoneNum;
         this.myReviews = myReviews;
         this.reservationInfos = reservationInfos;
     }
@@ -77,5 +79,13 @@ public class User {
 
     public void setReservationInfos(ArrayList<ReservationInfo> reservationInfos) {
         this.reservationInfos = reservationInfos;
+    }
+
+    public String getUserPhoneNum() {
+        return userPhoneNum;
+    }
+
+    public void setUserPhoneNum(String userPhoneNum) {
+        this.userPhoneNum = userPhoneNum;
     }
 }

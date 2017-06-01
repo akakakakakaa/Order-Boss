@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -69,7 +70,8 @@ public class ReservationActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //TODO: 2017.05.29 예약이 끝나면 예약정보를 서버로 보내는 프로세스 필요
-                ReservationInfo reservationInfo = new ReservationInfo(RestaurantInfo.getCurrentRestaurantInfo(), User.getCurrentUser().getCurrentOrderInfos(), -1, Calendar.getInstance());
+                EditText reservationWriteContent = (EditText)findViewById(R.id.reservationWriteContent);
+                ReservationInfo reservationInfo = new ReservationInfo(User.getCurrentUser().getUserId(), User.getCurrentUser().getUserName(), User.getCurrentUser().getUserPhoneNum(), RestaurantInfo.getCurrentRestaurantInfo(), User.getCurrentUser().getCurrentOrderInfos(), -1, Calendar.getInstance(), reservationWriteContent.getText().toString());
                 User.getCurrentUser().getReservationInfos().add(reservationInfo);
                 User.getCurrentUser().getCurrentOrderInfos().clear();
 

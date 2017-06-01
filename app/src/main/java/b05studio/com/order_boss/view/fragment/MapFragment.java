@@ -61,7 +61,6 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
     private TextView mapTitle;
     private String mapTitleString;
     private DaumService daumService;
-    private ViewGroup rootView;
 
     ArrayList<RestaurantInfo> restaurantInfos;
     boolean[] holiday;
@@ -71,33 +70,28 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = (ViewGroup) inflater.inflate(R.layout.fragment_map, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_map, container, false);
         Log.d("dddddddd",LocationTracker.getCurLoc().getLatitude() + "");
         //myLocation =
         mapTitle = (TextView)rootView.findViewById(R.id.mapTitle);
         if(mapTitleString != null)
             mapTitle.setText(mapTitleString);
 
-        initMapView();
+        initMapView(rootView);
+        initButton(rootView);
 
         mapRestaurantAdapter = new MapRestaurantAdapter(restaurantInfos, getContext(), inflater);
         mapRestaurantRecyclerView.setAdapter(mapRestaurantAdapter);
         return rootView;
     }
 
-
-    private void initMapView() {
+    private void initMapView(View rootView) {
         MapView mapView = new MapView(getActivity());
         mapView.setDaumMapApiKey(getString(R.string.daum_map_api_key));
         mapView.setMapViewEventListener(this);
         mapView.setPOIItemEventListener(this);
         ViewGroup mapViewContainer = (ViewGroup) rootView.findViewById(R.id.mapView);
         mapViewContainer.addView(mapView);
-    }
-
-    public void setTitle(String title) {
-        if(mapTitle != null)
-            mapTitle.setText("내 주변 " + title);
     }
 
     private void initButton(View rootView) {
@@ -117,6 +111,11 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
                 //startActivityForResult(intent);
             }
         });
+    }
+
+    public void setTitle(String title) {
+        if(mapTitle != null)
+            mapTitle.setText("내 주변 " + title);
     }
 
     @Override

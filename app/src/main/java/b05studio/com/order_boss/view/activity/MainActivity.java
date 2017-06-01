@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         /* for test create user*/
         //TODO:2017.05.29 유저정보를 데이터베이스에서 가져오는 프로세스 필요
-        User.setCurrentUser(new User("1", "", "김만수", new ArrayList<Review>(), new ArrayList<ReservationInfo>()));
+        User.setCurrentUser(new User("1", "", "김만수", "010-0000-0000", new ArrayList<Review>(), new ArrayList<ReservationInfo>()));
 
         requestLocationPermission();
         initFragment();

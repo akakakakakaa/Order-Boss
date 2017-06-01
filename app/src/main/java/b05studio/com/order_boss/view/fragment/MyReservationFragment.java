@@ -58,7 +58,7 @@ public class MyReservationFragment extends Fragment {
         //셋째 주 일요일
         holiday[20] = true;
 
-        ReservationInfo reservationInfo = new ReservationInfo(new RestaurantInfo("1", "멘무샤", "일식 > 라멘", "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1280, "1", 62, 12, 12, new ArrayList<Review>(), menuInfos), orderInfos, 25, Calendar.getInstance());
+        ReservationInfo reservationInfo = new ReservationInfo(User.getCurrentUser().getUserId(), User.getCurrentUser().getUserName(), User.getCurrentUser().getUserPhoneNum(), new RestaurantInfo("1", "멘무샤", "일식 > 라멘", "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1280, "1", 62, 12, 12, new ArrayList<Review>(), menuInfos), orderInfos, 25, Calendar.getInstance(), "배달 빨리해주세요.");
         reservationInfos.add(reservationInfo);
         if(reservationInfos.size() == 0)
             rootView.findViewById(R.id.myReservationNoResult).setVisibility(View.VISIBLE);
@@ -111,13 +111,15 @@ public class MyReservationFragment extends Fragment {
                 totalPrice += reservationInfo.getOrderInfos().get(i).getMenuInfo().getPrice() * reservationInfo.getOrderInfos().get(i).getMenuNum();
             holder.myReservationTotalPrice.setText(""+totalPrice);
 
-            for(int i=0; i<reservationInfo.getOrderInfos().size(); i++) {
-                View v = inflater.from(parent.getContext()).inflate(R.layout.cardview_myreservation_order, parent, false);
-                TextView myReservationOrderName = (TextView)v.findViewById(R.id.myReservationOrderName);
-                TextView myReservationOrderPrice = (TextView)v.findViewById(R.id.myReservationOrderPrice);
-                myReservationOrderName.setText(reservationInfo.getOrderInfos().get(i).getMenuInfo().getName());
-                myReservationOrderPrice.setText(reservationInfo.getOrderInfos().get(i).getMenuNum()+"*"+reservationInfo.getOrderInfos().get(i).getMenuInfo().getPrice());
-                holder.myReservationOrderList.addView(v);
+            if(holder.myReservationOrderList.getChildCount() < reservationInfo.getOrderInfos().size()) {
+                for (int i = 0; i < reservationInfo.getOrderInfos().size(); i++) {
+                    View v = inflater.from(parent.getContext()).inflate(R.layout.cardview_myreservation_order, parent, false);
+                    TextView myReservationOrderName = (TextView) v.findViewById(R.id.myReservationOrderName);
+                    TextView myReservationOrderPrice = (TextView) v.findViewById(R.id.myReservationOrderPrice);
+                    myReservationOrderName.setText(reservationInfo.getOrderInfos().get(i).getMenuInfo().getName());
+                    myReservationOrderPrice.setText(reservationInfo.getOrderInfos().get(i).getMenuNum() + "*" + reservationInfo.getOrderInfos().get(i).getMenuInfo().getPrice());
+                    holder.myReservationOrderList.addView(v);
+                }
             }
         }
 

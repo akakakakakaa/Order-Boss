@@ -8,16 +8,24 @@ import java.util.Calendar;
  */
 
 public class ReservationInfo {
+    private String userId;
+    private String userName;
+    private String userPhoneNum;
     private RestaurantInfo restaurantInfo;
     private ArrayList<OrderInfo> orderInfos;
     private int remainTime;
     private Calendar orderTime;
+    private String requestContent;
 
-    public ReservationInfo(RestaurantInfo restaurantInfo, ArrayList<OrderInfo> orderInfos, int remainTime, Calendar orderTime) {
+    public ReservationInfo(String userId, String userName, String userPhoneNum, RestaurantInfo restaurantInfo, ArrayList<OrderInfo> orderInfos, int remainTime, Calendar orderTime, String requestContent) {
+        this.userId = userId;
+        this.userName = userName;
+        this.userPhoneNum = userPhoneNum;
         this.restaurantInfo = restaurantInfo;
         this.orderInfos = orderInfos;
         this.remainTime = remainTime;
         this.orderTime = orderTime;
+        this.requestContent = requestContent;
     }
 
     public RestaurantInfo getRestaurantInfo() {
@@ -50,5 +58,37 @@ public class ReservationInfo {
 
     public void setOrderTime(Calendar orderTime) {
         this.orderTime = orderTime;
+    }
+
+    public String getUserPhoneNum() {
+        return userPhoneNum;
+    }
+
+    public void setUserPhoneNum(String userPhoneNum) {
+        this.userPhoneNum = userPhoneNum;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getRequestContent() {
+        return requestContent;
+    }
+
+    public void setRequestContent(String requestContent) {
+        this.requestContent = requestContent;
     }
 }
