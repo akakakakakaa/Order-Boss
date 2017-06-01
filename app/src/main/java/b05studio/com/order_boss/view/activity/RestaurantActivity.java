@@ -12,9 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import b05studio.com.order_boss.R;
 import b05studio.com.order_boss.model.User;
@@ -40,6 +43,8 @@ public class RestaurantActivity extends AppCompatActivity {
         initToolbar();
         initTabWithViewPager();
         initButtons();
+        ImageView imageView = (ImageView)findViewById(R.id.restaurantImage);
+        Picasso.with(this).load("https://search.pstatic.net/common/?src=http%3A%2F%2Fldb.phinf.naver.net%2F20161103_49%2F1478156297147Fl06K_PNG%2F177053558837052_0.png&type=l&size=1056x624&quality=95&autoRotate=true").into(imageView);
     }
 
     private void initScrollView() {

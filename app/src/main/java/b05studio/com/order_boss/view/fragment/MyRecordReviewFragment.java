@@ -49,6 +49,7 @@ public class MyRecordReviewFragment extends Fragment {
         reviewRecyclerView.scrollToPosition(0);
 
         ArrayList<Review> reviews = new ArrayList<>();
+        /*
         reviews.add(new Review("0", "임정연", "", 1,"코코야찌방야", "동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
                 " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
                 "단골해야겠습니다!!!!!!", "", 5));
@@ -58,7 +59,7 @@ public class MyRecordReviewFragment extends Fragment {
         reviews.add(new Review("2", "임정연", "", 1, "동대감","동네에 이런 분위기의 술집이 있는 줄 몰랐어요!\n" +
                 " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" +
                 "단골해야겠습니다!!!!!!", "", 5));
-
+        */
         ReviewAdapter reviewAdapter = new ReviewAdapter(reviews);
         reviewRecyclerView.setAdapter(reviewAdapter);
         reviewRecyclerView.setItemAnimator(new DefaultItemAnimator());

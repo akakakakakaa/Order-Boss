@@ -1,6 +1,7 @@
 package b05studio.com.order_boss.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by mansu on 2017-05-20.
@@ -11,17 +12,17 @@ public class Review {
 
     private String userName;
     private String userProfileUrl;
-    private long timestamp;
+    private Calendar calendar;
     private String restarauntName;
     private String reviewContent;
     private String reviewImgUrl;
     private int likeNumber;
 
-    public Review(String reviewId, String userName, String userProfileUrl, long timestamp, String restarauntName, String reviewContent, String reviewImgUrl, int likeNumber) {
+    public Review(String reviewId, String userName, String userProfileUrl, Calendar calendar, String restarauntName, String reviewContent, String reviewImgUrl, int likeNumber) {
         this.reviewId = reviewId;
         this.userName = userName;
         this.userProfileUrl = userProfileUrl;
-        this.timestamp = timestamp;
+        this.calendar = calendar;
         this.restarauntName = restarauntName;
         this.reviewContent = reviewContent;
         this.reviewImgUrl = reviewImgUrl;
@@ -43,14 +44,6 @@ public class Review {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
     }
 
     public String getReviewContent() {
@@ -91,5 +84,13 @@ public class Review {
 
     public void setRestarauntName(String restarauntName) {
         this.restarauntName = restarauntName;
+    }
+
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
     }
 }

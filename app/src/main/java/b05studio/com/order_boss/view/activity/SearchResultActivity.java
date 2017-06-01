@@ -1,7 +1,9 @@
 package b05studio.com.order_boss.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,10 +14,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import b05studio.com.order_boss.R;
 import b05studio.com.order_boss.model.RestaurantInfo;
+import b05studio.com.order_boss.model.User;
 
 /**
  * Created by mansu on 2017-05-31.
@@ -47,11 +52,12 @@ public class SearchResultActivity extends AppCompatActivity {
     // TODO: 2017-06-01  여기작업 해야됨,
     public ArrayList<RestaurantInfo> getMatchingRestaurantInfo(String keyword) {
        // //get restaurant infos
-        ArrayList<RestaurantInfo> restaurantInfos = new ArrayList<>();
+        ArrayList<RestaurantInfo> restaurantInfos = RestaurantInfo.getRestaurantInfosCache();
         ArrayList<RestaurantInfo> matchingInfos = new ArrayList<>();
         for(int i=0; i<restaurantInfos.size(); i++) {
             String foodTag = restaurantInfos.get(i).getFoodTag();
-            if(foodTag.indexOf(keyword) != -1) {
+            String name = restaurantInfos.get(i).getName();
+            if(foodTag.indexOf(keyword) != -1 || name.indexOf(keyword) != 1) {
                 matchingInfos.add((restaurantInfos.get(i)));
                 break;
             }
@@ -82,6 +88,29 @@ public class SearchResultActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            final RestaurantInfo restaurantInfo = restaurantInfos.get(position);
+
+            final ViewHolder viewHolder = (ViewHolder)holder;
+            viewHolder.searchResultCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    RestaurantInfo.setCurrentRestaurantInfo(restaurantInfo);
+                    Intent intent = new Intent(SearchResultActivity.this, RestaurantActivity.class);
+                    startActivity(intent);
+                }
+            });
+
+            Picasso.with(context).load(restaurantInfo.getImageUrl()).into(viewHolder.searchResultImageView);
+            viewHolder.searchResultName.setText((position + 1)+". "+restaurantInfo.getName());
+            viewHolder.searchResultFoodTag.setText(restaurantInfo.getFoodTag());
+            viewHolder.searchResultLikeNumber.setText(Integer.toString(restaurantInfo.getLikeNumber()));
+            viewHolder.searchResultReviewNumber.setText(Integer.toString(restaurantInfo.getReviewNumber()));
+            String distance;
+            if(restaurantInfo.getDistance() >= 1000)
+                distance = (restaurantInfo.getDistance() / 1000) + "." + (restaurantInfo.getDistance() % 1000)/10 + "km";
+            else
+                distance = restaurantInfo.getDistance() + "m";
+            viewHolder.searchResultDistance.setText(distance);
         }
 
         @Override
@@ -90,6 +119,7 @@ public class SearchResultActivity extends AppCompatActivity {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
+            public ConstraintLayout searchResultCard;
             public ImageView searchResultImageView;
             public TextView searchResultName;
             public TextView searchResultFoodTag;
@@ -99,6 +129,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
             public ViewHolder(View view) {
                 super(view);
+                searchResultCard = (ConstraintLayout)view.findViewById(R.id.searchResultCard);
                 searchResultImageView = (ImageView)view.findViewById(R.id.searchResultImageView);
                 searchResultName = (TextView)view.findViewById(R.id.searchResultName);
                 searchResultFoodTag = (TextView)view.findViewById(R.id.searchResultFoodTag);

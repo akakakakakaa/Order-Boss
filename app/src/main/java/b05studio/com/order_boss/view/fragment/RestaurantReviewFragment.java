@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import b05studio.com.order_boss.R;
@@ -58,11 +61,14 @@ public class RestaurantReviewFragment extends Fragment {
             Review review = reviews.get(position);
 
             holder.restaurantReviewName.setText(review.getUserName());
-            holder.restaurantReviewDate.setText(review.getTimestamp()+"");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd / aa HH:mm");
+            holder.restaurantReviewDate.setText(format.format(review.getCalendar().getTime()));
             holder.restaurantReviewContents.setText(review.getReviewContent());
             //Picasso.with(context).load(review.getProfileUrl()).into(holder.restaurantReviewProfileImg);
             //Picasso.with(context).load(review.reviewImgUrl()).into(holder.restaurantReviewContentsImg);
+            holder.restaurantReviewProfileImg.setImageResource(R.drawable.icon_jungyeon);
             holder.restaurantReviewContentsImg.setImageResource(R.drawable.restaurant_info_test_image1);
+            Picasso.with(context).load("img1.daumcdn.net/thumb/T680x420/?fname=http%3A%2F%2Ft1.daumcdn.net%2Fplace%2F99ED9647DBC0495C94D49DF8F681C1FA").into(holder.restaurantReviewContentsImg);
             switch(review.getLikeNumber()) {
                 case 5:
                     holder.restaurantReviewRate.setImageResource(R.drawable.icon_review_rate_five);

@@ -16,12 +16,16 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import b05studio.com.order_boss.R;
 import b05studio.com.order_boss.model.MenuInfo;
 import b05studio.com.order_boss.model.OrderInfo;
 import b05studio.com.order_boss.model.RestaurantInfo;
+import b05studio.com.order_boss.model.Review;
 import b05studio.com.order_boss.model.User;
 import b05studio.com.order_boss.view.activity.RestaurantActivity;
 
@@ -39,6 +43,16 @@ public class RestaurantMenuFragment extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView)rootView.findViewById(R.id.restaurantMenuRecyclerView);
         recyclerView.setHasFixedSize(true);
+
+        //get MenuInfo
+        RestaurantInfo.getCurrentRestaurantInfo().setMenuInfos(new ArrayList<MenuInfo>());
+        RestaurantInfo.getCurrentRestaurantInfo().getMenuInfos().add(new MenuInfo("https://search.pstatic.net/common/?src=http%3A%2F%2Fldb.phinf.naver.net%2F20161103_62%2F1478156185473F4uoW_JPEG%2Fc96b9ebb-4489-4928-972c-c822ed20d6f1.jpeg&type=l&size=210x140&quality=95&autoRotate=true", "부리또", 3300));
+        RestaurantInfo.getCurrentRestaurantInfo().getMenuInfos().add(new MenuInfo("https://search.pstatic.net/common/?src=http%3A%2F%2Fldb.phinf.naver.net%2F20161103_65%2F14781561857769RCXJ_PNG%2F95adfb1e-eec4-41da-8932-53d643947820.png&type=l&size=210x140&quality=95&autoRotate=true", "타코", 3800));
+        RestaurantInfo.getCurrentRestaurantInfo().getMenuInfos().add(new MenuInfo("https://search.pstatic.net/common/?src=http%3A%2F%2Fldb.phinf.naver.net%2F20161103_289%2F1478156185857om83R_JPEG%2F496e1f2e-7bb6-4c79-a1c4-71c1cc79e5cd.jpeg&type=l&size=210x140&quality=95&autoRotate=true", "퀘사디아", 8800));
+        RestaurantInfo.getCurrentRestaurantInfo().getMenuInfos().add(new MenuInfo("https://search.pstatic.net/common/?src=http%3A%2F%2Fldb.phinf.naver.net%2F20161103_169%2F1478156186036VETIU_PNG%2F9b4424da-5c66-43b7-b34c-a38a6a6843bb.png&type=l&size=210x140&quality=95&autoRotate=true", "모둠감자튀김", 4800));
+        //get reviewInfo
+        RestaurantInfo.getCurrentRestaurantInfo().setReviews(new ArrayList<Review>());
+        RestaurantInfo.getCurrentRestaurantInfo().getReviews().add(new Review("2", "임정연", "", Calendar.getInstance(), RestaurantInfo.getCurrentRestaurantInfo().getName(), "동네에 이렇게 맛있는 부리또가 있는줄 몰랐어요!\n" + " 분위기 너무나 좋고 음식들도 다 맛있어요ㅎㅎ\n" + "단골해야겠습니다!!!!!!", "", 5));
 
         RestaurantMenuAdatper restaurantMenuAdatper = new RestaurantMenuAdatper(RestaurantInfo.getCurrentRestaurantInfo().getMenuInfos(), getContext(), inflater);
         recyclerView.setAdapter(restaurantMenuAdatper);
@@ -68,7 +82,7 @@ public class RestaurantMenuFragment extends Fragment {
         public void onBindViewHolder(RestaurantMenuFragment.RestaurantMenuAdatper.ViewHolder holder, int position) {
             final MenuInfo menuInfo = menuInfos.get(position);
 
-            //Picasso.with(context).load(menuInfo.getUrl()).into(holder.restaurantInfoMenuImage);
+            Picasso.with(context).load(menuInfo.getUrl()).into(holder.restaurantMenuImage);
             holder.restaurantMenuWrapper.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -79,7 +93,6 @@ public class RestaurantMenuFragment extends Fragment {
                         showDeleteYesOrNoPopupView(menuInfo);
                 }
             });
-            holder.restaurantMenuImage.setImageResource(R.drawable.restaurant_info_test_image1);
             holder.restaurantMenuName.setText(menuInfo.getName());
             holder.restaurantMenuPrice.setText(menuInfo.getPrice() + "원");
         }
@@ -104,7 +117,7 @@ public class RestaurantMenuFragment extends Fragment {
                     RestaurantActivity.popupWindow = null;
                 }
             });
-            menuImg.setImageResource(R.drawable.restaurant_info_test_image1);
+            Picasso.with(context).load(menuInfo.getUrl()).into(menuImg);
             menuName.setText(menuInfo.getName());
             menuPrice.setText(menuInfo.getPrice() + "원");
             menuNum.setText("1개");

@@ -71,11 +71,12 @@ public class ReservationActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //TODO: 2017.05.29 예약이 끝나면 예약정보를 서버로 보내는 프로세스 필요
                 EditText reservationWriteContent = (EditText)findViewById(R.id.reservationWriteContent);
-                ReservationInfo reservationInfo = new ReservationInfo(User.getCurrentUser().getUserId(), User.getCurrentUser().getUserName(), User.getCurrentUser().getUserPhoneNum(), RestaurantInfo.getCurrentRestaurantInfo(), User.getCurrentUser().getCurrentOrderInfos(), -1, Calendar.getInstance(), reservationWriteContent.getText().toString());
+                ReservationInfo reservationInfo = new ReservationInfo(User.getCurrentUser().getUserId(), User.getCurrentUser().getUserName(), User.getCurrentUser().getUserPhoneNum(), RestaurantInfo.getCurrentRestaurantInfo(), (ArrayList<OrderInfo>)User.getCurrentUser().getCurrentOrderInfos().clone(), 25, Calendar.getInstance(), reservationWriteContent.getText().toString());
                 User.getCurrentUser().getReservationInfos().add(reservationInfo);
                 User.getCurrentUser().getCurrentOrderInfos().clear();
 
                 Intent intent = new Intent(ReservationActivity.this, MainActivity.class);
+                intent.putExtra("reservation", true);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
@@ -149,7 +150,7 @@ public class ReservationActivity extends AppCompatActivity {
                 break;
         }
         if(disableBtn != null) {
-            disableBtn.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            disableBtn.setBackgroundResource(R.drawable.cardview_reservation_personnel_button_disable);
             disableBtn.setTextColor(Color.parseColor("#000000"));
         }
 
@@ -175,7 +176,7 @@ public class ReservationActivity extends AppCompatActivity {
                     enableBtn = btnChooseNum;
                     break;
             }
-            enableBtn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            enableBtn.setBackgroundResource(R.drawable.cardview_reservation_personnel_button_enable);
             enableBtn.setTextColor(Color.parseColor("#FFFFFF"));
             peopleNum = num;
         }

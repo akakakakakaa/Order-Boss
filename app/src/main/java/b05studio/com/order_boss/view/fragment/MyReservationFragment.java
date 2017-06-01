@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,11 +36,11 @@ public class MyReservationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_myreservation, container, false);
 
-
         //for restaurant list
         RecyclerView myReservationRecyclerView = (RecyclerView)rootView.findViewById(R.id.myReservationRecyclerView);
         myReservationRecyclerView.setHasFixedSize(true);
         ArrayList<ReservationInfo> reservationInfos = User.getCurrentUser().getReservationInfos();
+        /*
         //TODO:2017.06.01 ReservationInfo 가져오는것 필요함
         ArrayList<MenuInfo> menuInfos = new ArrayList<>();
         menuInfos.add(new MenuInfo("", "소세지 또띠아", 15000));
@@ -60,6 +62,7 @@ public class MyReservationFragment extends Fragment {
 
         ReservationInfo reservationInfo = new ReservationInfo(User.getCurrentUser().getUserId(), User.getCurrentUser().getUserName(), User.getCurrentUser().getUserPhoneNum(), new RestaurantInfo("1", "멘무샤", "일식 > 라멘", "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 1280, "1", 62, 12, 12, new ArrayList<Review>(), menuInfos), orderInfos, 25, Calendar.getInstance(), "배달 빨리해주세요.");
         reservationInfos.add(reservationInfo);
+        */
         if(reservationInfos.size() == 0)
             rootView.findViewById(R.id.myReservationNoResult).setVisibility(View.VISIBLE);
         else {
@@ -95,7 +98,7 @@ public class MyReservationFragment extends Fragment {
 
             SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd / aa HH:mm");
             holder.myReservationDate.setText(format.format(reservationInfo.getOrderTime().getTime()));
-            holder.myReservationMenuImage.setImageResource(R.drawable.restaurant_info_test_image1);
+            Picasso.with(context).load(reservationInfo.getRestaurantInfo().getImageUrl()).into(holder.myReservationMenuImage);
             holder.myReservationRestaurantName.setText(reservationInfo.getRestaurantInfo().getName());
 
             holder.myReservationFoodTag.setText(reservationInfo.getRestaurantInfo().getFoodTag());
@@ -115,9 +118,11 @@ public class MyReservationFragment extends Fragment {
                 for (int i = 0; i < reservationInfo.getOrderInfos().size(); i++) {
                     View v = inflater.from(parent.getContext()).inflate(R.layout.cardview_myreservation_order, parent, false);
                     TextView myReservationOrderName = (TextView) v.findViewById(R.id.myReservationOrderName);
+                    TextView myReservationOrderNumber = (TextView)v.findViewById(R.id.myReservationOrderNumber);
                     TextView myReservationOrderPrice = (TextView) v.findViewById(R.id.myReservationOrderPrice);
                     myReservationOrderName.setText(reservationInfo.getOrderInfos().get(i).getMenuInfo().getName());
-                    myReservationOrderPrice.setText(reservationInfo.getOrderInfos().get(i).getMenuNum() + "*" + reservationInfo.getOrderInfos().get(i).getMenuInfo().getPrice());
+                    myReservationOrderNumber.setText(reservationInfo.getOrderInfos().get(i).getMenuNum()+"개");
+                    myReservationOrderPrice.setText(reservationInfo.getOrderInfos().get(i).getMenuInfo().getPrice()+"");
                     holder.myReservationOrderList.addView(v);
                 }
             }

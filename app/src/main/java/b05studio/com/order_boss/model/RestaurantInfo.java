@@ -36,6 +36,13 @@ public class RestaurantInfo {
     public static void setCurrentRestaurantInfo(RestaurantInfo restaurantInfo) {
         currentRestaurantInfo = restaurantInfo;
     }
+    public static ArrayList<RestaurantInfo> restaurantInfosCache;
+    public static ArrayList<RestaurantInfo> getRestaurantInfosCache() {
+        return restaurantInfosCache;
+    }
+    public static void setRestaurantInfosCache(ArrayList<RestaurantInfo> cache) {
+        restaurantInfosCache = cache;
+    }
 
     public RestaurantInfo(String id, String name, String foodTag, String address, String phoneNum, int distance, int startMinute, int endHour, int endMinute, boolean[] holiday, String holidayString, String avgPrice, int startHour, String imageUrl, int likeNumber, int reviewNumber, int time, ArrayList<Review> reviews, ArrayList<MenuInfo> menuInfos) {
         this.id = id;

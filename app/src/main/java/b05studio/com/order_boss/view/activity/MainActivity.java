@@ -58,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
     private MyReservationFragment myReservationFragment;   //inittoolbar 2
     private ProfileFragment profileFragment;                //inittoolbar 3
 
-   LocationManager locationManager;
+    LocationManager locationManager;
     private Location currentLocation;
+    private BottomNavigationBar bottomNavigationBar;
 
     private LocationListener mLocationListner = new LocationListener() {
         @Override
@@ -91,13 +92,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /* for test create user*/
-        //TODO:2017.05.29 유저정보를 데이터베이스에서 가져오는 프로세스 필요
-        User.setCurrentUser(new User("1", "", "김만수", "010-0000-0000", new ArrayList<Review>(), new ArrayList<ReservationInfo>()));
 
         requestLocationPermission();
-        initFragment();
         initBottomNaviBar();
+        initFragment();
     }
 
     private void requestGetMyLocation() {
@@ -173,11 +171,19 @@ public class MainActivity extends AppCompatActivity {
         profileFragment = new ProfileFragment();
 
         firstTabSwitching = 1;
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, restaurantListFragment).commit();
+        if(getIntent().getBooleanExtra("reservation", false)) {
+            //getSupportFragmentManager().beginTransaction().replace(R.id.container, myReservationFragment).commit();
+            //currentSelectedFragment = myReservationFragment;
+            bottomNavigationBar.selectTab(1);
+        }
+        else {
+            //getSupportFragmentManager().beginTransaction().replace(R.id.container, restaurantListFragment).commit();
+            //currentSelectedFragment = restaurantListFragment;
+            bottomNavigationBar.selectTab(0);
+        }
     }
 
     private void initBottomNaviBar() {
-        BottomNavigationBar bottomNavigationBar;
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.mainBottomNavigationBar);
 
         BottomNavigationItem firstBottomItem = new BottomNavigationItem(R.drawable.icon_main_checked);

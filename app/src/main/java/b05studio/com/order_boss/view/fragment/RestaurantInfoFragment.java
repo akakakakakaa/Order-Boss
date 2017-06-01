@@ -35,7 +35,6 @@ public class RestaurantInfoFragment extends Fragment {
 
         RecyclerView recyclerView = (RecyclerView)rootView.findViewById(R.id.restaurantInfoRecyclerView);
         recyclerView.setHasFixedSize(true);
-        //get MenuInfo
         RestaurantInfoFragment.RestaurantInfoAdatper restaurantMenuAdatper = new RestaurantInfoFragment.RestaurantInfoAdatper(RestaurantInfo.getCurrentRestaurantInfo().getMenuInfos(), getContext(), inflater);
         recyclerView.setAdapter(restaurantMenuAdatper);
 

@@ -12,7 +12,7 @@
         android:scaleType="fitXY" />
     <View
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="120dp"
         android:background="@drawable/cardview_restaurant_list_gradient"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="75dp"
         android:textSize="18sp"
         android:textColor="@android:color/white"
         android:textStyle="bold"
@@ -30,21 +30,22 @@
         android:id="@+id/restaurantListFoodTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="11dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
         android:textSize="12sp"
         android:textColor="@android:color/white"
-        app:layout_constraintLeft_toRightOf="@+id/restaurantListName"
-        app:layout_constraintTop_toTopOf="@+id/restaurantListName"
-        app:layout_constraintBottom_toBottomOf="@+id/restaurantListName"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantListName" />
     <TextView
         android:id="@+id/restaurantListDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="13dp"
-        android:textSize="14sp"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
         android:textColor="@android:color/white"
+        app:layout_constraintLeft_toRightOf="@+id/restaurantListName"
         app:layout_constraintTop_toBottomOf="@+id/restaurantListName"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/restaurantListName" />
 
     <ImageButton
@@ -52,13 +53,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="12dp"
         android:src="@drawable/icon_heart"
         android:background="@null"
         android:tint="#FFFFFF"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restaurantListName"
+        app:layout_constraintTop_toBottomOf="@+id/restaurantListFoodTag"
         app:layout_constraintBottom_toBottomOf="parent" />
     <TextView
         android:id="@+id/restaurantListLikeNumber"

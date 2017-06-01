@@ -98,12 +98,14 @@ public class RestaurantListFragment extends Fragment {
         // 내 주위 맛집 띄우기.
         daumService = DaumServiceGenerator.createService(DaumService.class);
         String daumLocationString = lat + "," + lon;
-        Call<DaumLocalInfo> daumLocalInfos = daumService.listKeywordRestaurant(getString(R.string.daum_map_api_key),"맛집",daumLocationString);
+        Call<DaumLocalInfo> daumLocalInfos = daumService.listKeywordRestaurant(getString(R.string.daum_map_api_key),"내주변맛집",daumLocationString);
         daumLocalInfos.enqueue(new Callback<DaumLocalInfo>() {
             @Override
             public void onResponse(Call<DaumLocalInfo> call, Response<DaumLocalInfo> response) {
                 if(response.isSuccessful()) {
                     int count = 0;
+                    restaurantInfos.add(new RestaurantInfo("", "멕시모부리또", "음식점 > 양식 > 멕시칸,브라질", "경기 수원시 영통구 덕영대로1681번길 14", "031-202-9976", 132,
+                            0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "삼천원 ~ 만원", 128, "https://search.pstatic.net/common/?src=http%3A%2F%2Fldb.phinf.naver.net%2F20161103_49%2F1478156297147Fl06K_PNG%2F177053558837052_0.png&type=l&size=1056x624&quality=95&autoRotate=true", 62, 12, 12, reviews, menuInfos));
                     for (DaumLocalInfo.Item item : response.body().getChannel().getItem()) {
 
                         //restaurantInfos.add(new RestaurantInfo("1", "멘무샤", foodTag, "경기도 화성시 동탄중앙로 220", "010-0000-0000", 17, 0, 2, 0, holiday, "첫째 주, 셋째 주 일요일", "만원 ~ 이만원", 128, "1", 62, 12, 12, reviews, menuInfos));
@@ -112,6 +114,7 @@ public class RestaurantListFragment extends Fragment {
 
                         count++;
                     }
+                    RestaurantInfo.setRestaurantInfosCache(restaurantInfos);
                     restaurantListAdapter.notifyDataSetChanged();
 
                 } else {
