@@ -268,25 +268,7 @@ public class MapFragment extends Fragment implements MapView.MapViewEventListene
                 }
             });
             //Picasso.with(context).load(restaurant.getImageUrl()).into(holder.mapRestaurantImageView);
-            Picasso.with(context).load(restaurantInfo.getImageUrl())
-                    .into(new Target() {
-                        @Override
-                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                            RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-                            dr.setCornerRadius(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()));
-                            holder.mapRestaurantImageView.setImageDrawable(dr);
-                        }
-
-                        @Override
-                        public void onBitmapFailed(Drawable errorDrawable) {
-
-                        }
-
-                        @Override
-                        public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-                        }
-                    });
+            Picasso.with(context).load(restaurantInfo.getImageUrl()).into(holder.mapRestaurantImageView);
             holder.mapRestaurantName.setText(restaurantInfo.getName());
             holder.mapRestaurantFoodTag.setText(foodTag);
             holder.mapRestaurantAddress.setText(restaurantInfo.getAddress());
